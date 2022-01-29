@@ -1,2 +1,7 @@
 <h1 style="text-align: center; margin-top: 3%; font-family: sans-serif;">Hospital Management System</h1>
 <h4>{{ request.user }}</h4>
+{% load static %}
+{% for pat in patient %}
+    <div style="text-align: center;">{{ pat.name }}</div>
+    <div style="text-align: center;"><img src="{{ pat.image.url }}" alt="" height="150px" width="300px"></div>
+{% endfor %}
