@@ -7,7 +7,7 @@ from mptt.models import MPTTModel
 # Create your models here.
 
 
-class Hospital_Staff(MPTTModel):
+class Staff(MPTTModel):
     parent = TreeForeignKey('self', blank=True, null=True, related_name='children', on_delete=models.CASCADE)
     title = models.CharField(max_length=30)
     keywords = models.CharField(max_length=255)
@@ -29,11 +29,12 @@ class Employee(models.Model):
         ('Blocked', 'Blocked')
     )
 
-    role = models.ForeignKey(Hospital_Staff, blank=True, on_delete=models.CASCADE)
-    name = models.CharField(max_length=30)
+    role = models.ForeignKey('hospital_staff.Staff', blank=True, on_delete=models.CASCADE)
+    name = models.CharField(max_length=30)  #
     surname = models.CharField(max_length=30)
     middlename = models.CharField(max_length=30, blank=True, null=True)
     personal_ID_number = models.CharField(max_length=15)
+    birthdate = models.DateField('birthdate', blank=True, null=True, auto_now=False, auto_now_add=False)
     phone = models.CharField(max_length=30, blank=True, null=True)
     mobile = models.CharField(max_length=30, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
