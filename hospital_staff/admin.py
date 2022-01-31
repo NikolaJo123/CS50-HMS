@@ -2,13 +2,13 @@ from django.contrib import admin
 from django.utils.html import format_html
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import Hospital_Staff, Employee
+from .models import Staff, Employee
 
 
 # Register your models here.
 
 
-class HospitalStaffAdmin(DraggableMPTTAdmin):
+class StaffAdmin(DraggableMPTTAdmin):
     mptt_indent_field = 'title'
     list_display = ('tree_actions', 'indented_title')
     list_display_links = ('indented_title',)
@@ -28,5 +28,5 @@ class EmployeeAdmin(admin.ModelAdmin):
     readonly_fields = ['image_tag']
 
 
-admin.site.register(Hospital_Staff, HospitalStaffAdmin)
+admin.site.register(Staff, StaffAdmin)
 admin.site.register(Employee, EmployeeAdmin)
