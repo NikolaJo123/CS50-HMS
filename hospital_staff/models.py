@@ -2,6 +2,7 @@ from statistics import mode
 from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+from core.models import Location, UserContact, UserData
 
 
 # Create your models here.
@@ -22,7 +23,7 @@ class Staff(MPTTModel):
         order_insertion_by = ['title']
 
 
-class Employee(models.Model):
+class Employee(Location):
     STATUS = (
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
@@ -38,9 +39,6 @@ class Employee(models.Model):
     phone = models.CharField(max_length=30, blank=True, null=True)
     mobile = models.CharField(max_length=30, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    address = models.CharField(blank=True, max_length=200)
-    city = models.CharField(blank=True, max_length=50)
-    country = models.CharField(blank=True, max_length=50)
     status = models.CharField(max_length=10, choices=STATUS)
     #eployee_ID = models.CharField(max_length=10)
     image = models.ImageField(blank=True, upload_to='images/employees/')
