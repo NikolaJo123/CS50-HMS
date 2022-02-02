@@ -18,13 +18,38 @@ class StaffAdmin(DraggableMPTTAdmin):
 
 class EmployeeAdmin(admin.ModelAdmin):
     def image_tag(self, obj):
-        return format_html('<img src="{}" width="auto" height="50px" />'.format(obj.image.url))
+        return format_html('<img src="{}" width="auto" height="50px" />'.format(obj.user_image.url))
     
     image_tag.short_description = 'Image Preview'
     image_tag.allow_tags = True
 
-    list_display = ['name', 'surname', 'middlename', 'personal_ID_number', 'employed', 'updated_info', 'image_tag']
-    list_filter = ['name', 'surname', 'personal_ID_number']
+    TEXT = "Click on to 'hide' to hide this section."
+
+    list_display = ['role', 'employed', 'updated_info']
+    list_filter = ['name', 'surname', 'role']
+    fieldsets = (
+        ('Basic Info', {
+            'fields': [('name', 'middlename', 'surname',), 'birthdate', 'personal_ID_number'],
+        }),
+        ('Status', {
+            'fields': [('user','role', 'status')]
+        }),
+        ('Contact Info', {
+            'fields': [('phone', 'mobile', 'email')],
+            'classes': ('collapse',),
+            'description': '%s' % TEXT,
+        }),
+        ('Address Info', {
+            'fields': [('address', 'city', 'country')],
+            'classes': ('collapse',),
+            'description': '%s' % TEXT,
+        }),
+        ('Image', {
+            'fields': ['user_image', 'image_tag'],
+            'classes': ('collapse',),
+            'description': '%s' % TEXT,
+        }),
+    )
     readonly_fields = ['image_tag']
 
 
