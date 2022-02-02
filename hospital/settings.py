@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'patient.apps.PatientConfig',
     'hospital_staff.apps.HospitalStaffConfig',
+    'appointment.apps.AppointmentConfig',
     'core',
     'mptt',
 ]
