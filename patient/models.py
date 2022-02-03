@@ -37,3 +37,13 @@ class PatientExamination(models.Model):
 
     def __str__(self):
         return self.patient.name
+
+
+class PatientHistory(models.Model):
+    patient = models.ForeignKey('Patient', on_delete=models.CASCADE)
+    doctor = models.ForeignKey(User, on_delete=models.CASCADE)
+    history = models.ForeignKey('patient.PatientExamination', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.patient.name
+
