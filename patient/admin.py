@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Patient
+from .models import Patient, PatientExamination
 
 
 # Register your models here.
@@ -41,4 +41,10 @@ class PatientAdmin(admin.ModelAdmin):
     readonly_fields = ['image_tag']
 
 
+class PatientExaminationAdmin(admin.ModelAdmin):
+    list_display = ['patient', 'patient_status', 'prescription', 'doctor', 'examined', 'updated_at']
+    list_filter = ['patient', 'patient_status', 'doctor']
+
+
 admin.site.register(Patient, PatientAdmin)
+admin.site.register(PatientExamination, PatientExaminationAdmin)
