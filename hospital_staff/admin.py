@@ -25,14 +25,14 @@ class EmployeeAdmin(admin.ModelAdmin):
 
     TEXT = "Click on to 'hide' to hide this section."
 
-    list_display = ['role', 'employed', 'updated_info']
-    list_filter = ['name', 'surname', 'role']
+    list_display = ['user', 'role', 'employed', 'updated_info', 'image_tag']
+    list_filter = ['user', 'role']
     fieldsets = (
         ('Basic Info', {
-            'fields': [('name', 'middlename', 'surname',), 'birthdate', 'personal_ID_number'],
+            'fields': [('user', 'middlename',), 'birthdate', 'personal_ID_number'],
         }),
         ('Status', {
-            'fields': [('user','role', 'status')]
+            'fields': [('role', 'status')]
         }),
         ('Contact Info', {
             'fields': [('phone', 'mobile', 'email')],
