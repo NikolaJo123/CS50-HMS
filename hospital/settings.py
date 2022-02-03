@@ -39,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
-    'patient.apps.PatientConfig',
-    'hospital_staff.apps.HospitalStaffConfig',
-    'appointment.apps.AppointmentConfig',
+    'patient',
+    'hospital_staff',
+    'appointment',
     'core',
     'mptt',
 ]
