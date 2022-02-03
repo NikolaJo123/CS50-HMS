@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.html import format_html
 
-from .models import Patient, PatientExamination
+from .models import Patient, PatientExamination, PatientHistory
 
 
 # Register your models here.
@@ -46,5 +46,11 @@ class PatientExaminationAdmin(admin.ModelAdmin):
     list_filter = ['patient', 'patient_status', 'doctor']
 
 
+class PatientHistoryAdmin(admin.ModelAdmin):
+    list_display = ['patient', 'doctor', 'history']
+    list_filter = ['patient', 'doctor']
+
+
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(PatientExamination, PatientExaminationAdmin)
+admin.site.register(PatientHistory, PatientHistoryAdmin)
