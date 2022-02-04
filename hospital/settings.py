@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'core',
     'payment',
     'mptt',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
