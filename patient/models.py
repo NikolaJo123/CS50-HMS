@@ -27,7 +27,7 @@ class Patient(models.Model):
   
 
 class PatientExamination(models.Model):
-    patient = models.ForeignKey('Patient', on_delete=models.CASCADE)
+    patient = models.ForeignKey('patient.Patient', on_delete=models.CASCADE)
     doctor = models.ForeignKey(User, on_delete=models.CASCADE)
     patient_status = models.CharField(max_length=255)
     prescription = models.TextField()
