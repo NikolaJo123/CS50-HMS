@@ -16,10 +16,12 @@ from .serializers import AppointmentSerializer
 
 
 def index(request):
-    #patient = Patient.objects.all()
-    #context = {'patient': patient}
-    #return render(request, 'index.html', context)
+    patient = Patient.objects.all()
+    context = {'patient': patient}
+    return render(request, 'index.html', context)
 
+
+def patient(request):
     if request.method == 'GET':
         patients = Patient.objects.all()
         ser = AppointmentSerializer(patients, many=True)
@@ -27,3 +29,6 @@ def index(request):
         return JsonResponse(ser.data, safe=False)
     else:
         return JsonResponse({"error": "POST request required."}, status=400)
+
+
+
