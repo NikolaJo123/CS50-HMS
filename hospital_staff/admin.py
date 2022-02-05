@@ -10,7 +10,7 @@ from .models import Staff, Employee, Clinic
 
 class StaffAdmin(DraggableMPTTAdmin):
     mptt_indent_field = 'title'
-    list_display = ('tree_actions', 'indented_title')
+    list_display = ('tree_actions', 'indented_title', 'created_at', 'updated_at')
     list_display_links = ('indented_title',)
     list_filter = ['title']
     prepopulated_fields = {'keywords': ('title',)}
