@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.utils.html import format_html
 from mptt.admin import DraggableMPTTAdmin
 
-from .models import Staff, Employee, Clinic
+from .models import Staff, Employee, Speciality
 
 
 # Register your models here.
@@ -53,7 +53,7 @@ class EmployeeAdmin(admin.ModelAdmin):
     readonly_fields = ['image_tag']
 
 
-class ClinicAdmin(admin.ModelAdmin):
+class SpecialityAdmin(admin.ModelAdmin):
     list_display = ['department', 'created_at', 'updated_at']
     list_filter = ['department']
     prepopulated_fields = {'keywords': ('department',)}
@@ -62,4 +62,4 @@ class ClinicAdmin(admin.ModelAdmin):
 
 admin.site.register(Staff, StaffAdmin)
 admin.site.register(Employee, EmployeeAdmin)
-admin.site.register(Clinic, ClinicAdmin)
+admin.site.register(Speciality, SpecialityAdmin)
