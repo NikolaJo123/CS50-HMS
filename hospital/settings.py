@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'patient',
     'hospital_staff',
     'appointment',
+    'clinics',
+    'laboratory',
     'core',
     'payment',
     'mptt',
