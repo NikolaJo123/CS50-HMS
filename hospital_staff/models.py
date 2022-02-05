@@ -24,7 +24,7 @@ class Staff(MPTTModel):
         order_insertion_by = ['title']
 
 
-class Clinic(models.Model):
+class Speciality(models.Model):
     department = models.CharField(max_length=100)
     keywords = models.CharField(max_length=255)
     description = models.TextField()
@@ -45,7 +45,7 @@ class Employee(Location, UserContact):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     middlename = models.CharField(max_length=30, blank=True, null=True)
     role = models.ForeignKey('hospital_staff.Staff', blank=True, on_delete=models.CASCADE)
-    speciality = models.ForeignKey('hospital_staff.Clinic', blank=True, null=True, on_delete=models.CASCADE)
+    speciality = models.ForeignKey('hospital_staff.Speciality', blank=True, null=True, on_delete=models.CASCADE)
     personal_ID_number = models.CharField(max_length=15)
     status = models.CharField(max_length=10, choices=STATUS)
     #employee_ID = models.CharField(max_length=10)
