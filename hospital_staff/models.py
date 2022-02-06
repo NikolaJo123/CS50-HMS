@@ -1,6 +1,7 @@
 from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
+from django.utils.translation import gettext_lazy as _
 
 from django.contrib.auth.models import User
 from core.models import Location, UserContact
@@ -36,18 +37,23 @@ class Speciality(models.Model):
 
 
 class Employee(Location, UserContact):
-    STATUS = (
+    '''STATUS = (
         ('Active', 'Active'),
         ('Inactive', 'Inactive'),
         ('Blocked', 'Blocked')
-    )
+    )'''
+
+    class StatusChoice(models.TextChoices):
+        ACTIVE = 'Ac', _('Active')
+        INACTIVE = 'IA', _('Inactive')
+        BLOCKED = 'BL', _('Blocked')
 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     middlename = models.CharField(max_length=30, blank=True, null=True)
     role = models.ForeignKey('hospital_staff.Staff', blank=True, on_delete=models.CASCADE)
     speciality = models.ForeignKey('hospital_staff.Speciality', blank=True, null=True, on_delete=models.CASCADE)
     personal_ID_number = models.CharField(max_length=15)
-    status = models.CharField(max_length=10, choices=STATUS)
+    status = models.CharField(max_length=10, choices=StatusChoice.choices, default=StatusChoice.ACTIVE)
     #employee_ID = models.CharField(max_length=10)
     birthdate = models.DateField('birthdate', blank=True, null=True, auto_now=False, auto_now_add=False)
     user_image = models.ImageField(blank=True, upload_to='images/')
