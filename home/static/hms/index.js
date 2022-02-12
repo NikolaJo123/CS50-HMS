@@ -47,7 +47,7 @@ function register_patient (){
     var surname = document.querySelector('#register-surname').value;
     var middlename = document.querySelector('#register-middlename').value;
     var patient_ID = document.querySelector('#register-patient-id').value;
-    var age = document.querySelector('#register-age').value;
+    var birthdate = document.querySelector('#register-birthdate').value;
     var phone = document.querySelector('#register-phone').value;
     var mobile = document.querySelector('#register-mobile').value;
     var email = document.querySelector('#register-email').value;
@@ -63,7 +63,7 @@ function register_patient (){
             surname: surname,
             middlename: middlename,
             patient_ID: patient_ID,
-            age: age,
+            birthdate: birthdate,
             phone: phone,
             mobile: mobile,
             email: email,
@@ -96,7 +96,7 @@ function get_patients() {
                 <div>${patients[i].surname}</div>
                 <div>${patients[i].middlename}</div>
                 <div>${patients[i].patient_ID}</div>
-                <div>${patients[i].age}</div>
+                <div>${patients[i].birthdate}</div>
                 <div>${patients[i].phone}</div>
                 <div>${patients[i].mobile}</div>
                 <div>${patients[i].email}</div>

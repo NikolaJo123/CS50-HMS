@@ -50,28 +50,26 @@ def register_patient(request):
     surname = patientdata.get('surname', "")
     middlename = patientdata.get('middlename', "")
     patient_ID = patientdata.get('patient_ID', "")
-    age = patientdata.get('age', "")
+    birthdate = patientdata.get('birthdate', "")
     phone = patientdata.get('phone', "")
     mobile = patientdata.get('mobile', "")
     email = patientdata.get('email', "")
     address = patientdata.get('address', "")
     city = patientdata.get('city', "")
     country = patientdata.get('country', "")
-    image = patientdata.get('image', "")
 
     register = Patient(
         name = name,
         surname = surname,
         middlename = middlename,
         patient_ID = patient_ID,
-        age = age,
+        birthdate = birthdate,
         phone = phone,
         mobile = mobile,
         email = email,
         address = address,
         city = city,
-        country = country,
-        image = image
+        country = country
     )
     register.save()
 

@@ -19,7 +19,7 @@ class PatientForm(forms.ModelForm):
             'surname' : forms.TextInput(attrs={'class': 'form-control col-md-8 col-lg-4', 'placeholder': 'Surname'}),
             'middlename' : forms.TextInput(attrs={'class': 'form-control col-md-8 col-lg-4', 'placeholder': 'Middlename'}),
             'patient_ID': forms.TextInput(attrs={'class': 'form-control col-md-8 col-lg-4', 'placeholder': 'Patient ID'}),
-            'age': forms.NumberInput(attrs={'class': 'form-control col-md-8 col-lg-2'}),
+            #'age': forms.NumberInput(attrs={'class': 'form-control col-md-8 col-lg-2'}),
             'phone' : forms.TextInput(attrs={'class': 'form-control col-md-8 col-lg-4', 'placeholder': 'Phone'}),
             'mobile' : forms.TextInput(attrs={'class': 'form-control col-md-8 col-lg-4', 'placeholder': 'Mobile'}),
             'email' : forms.EmailInput(attrs={'class': 'form-control rounded-left', 'placeholder': 'Email Address'}),

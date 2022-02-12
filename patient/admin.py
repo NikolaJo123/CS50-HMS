@@ -12,11 +12,11 @@ class PatientAdmin(admin.ModelAdmin):
 
     TEXT = "Click on to 'hide' to hide this section."
 
-    list_display = ['name', 'surname', 'middlename', 'patient_ID', 'age', 'created_at', 'updated_at']
+    list_display = ['name', 'surname', 'middlename', 'patient_ID', 'created_at', 'updated_at']
     list_filter = ['name', 'surname', 'patient_ID']
     fieldsets = (
         ('Basic Info', {
-            'fields': [('name', 'middlename', 'surname',), 'age', 'patient_ID'],
+            'fields': [('name', 'middlename', 'surname',), 'birthdate', 'patient_ID'],
         }),
         ('Contact Info', {
             'fields': [('phone', 'mobile', 'email')],

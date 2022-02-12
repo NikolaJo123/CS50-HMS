@@ -33,6 +33,8 @@
                 Nurse: <div>{{ request.user }}</div>
                 <hr>
             </div>
+
+            <div id="message"></div>
             {% csrf_token %}
             <!--{{ form.as_p }}-->
             <div class="form-group col-md-3">
@@ -47,8 +49,12 @@
             <div class="form-group col-md-3">
                 <input  name="patient_ID" class="form-control" id="register-patient-id"   placeholder="Patient ID" required>
             </div>
-            <div class="form-group col-md-3">
+            <!--<div class="form-group col-md-3">
                 <input name="age" class="form-control" id="register-age" type="number" placeholder="Age"   required>
+            </div>-->
+            <div class="form-group col-md-3">
+                <label for="birthday">Birthday:</label>
+                <input type="date" id="register-birthdate" name="birthday">
             </div>
             <div class="form-group col-md-3">
                 <input  name="phone" class="form-control" id="register-phone" placeholder="Phone" >
