@@ -4,3 +4,8 @@ h1 {
     margin-top: 3%; 
     font-family: sans-serif;
 }
+
+img {
+    width: 50px;
+    height: 60px;
+}

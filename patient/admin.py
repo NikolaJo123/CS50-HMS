@@ -1,22 +1,18 @@
 from django.contrib import admin
 from django.utils.html import format_html
+from django.utils.safestring import mark_safe
 
-from .models import Patient, PatientExamination, PatientHistory
+from .models import Patient, PatientExamination, PatientHistory, Testmodel
 
 
 # Register your models here.
 
 
-class PatientAdmin(admin.ModelAdmin):
-    def image_tag(self, obj):
-        return format_html('<img src="{}" width="auto" height="50px" />'.format(obj.image.url))
-    
-    image_tag.short_description = 'Image Preview'
-    image_tag.allow_tags = True
+class PatientAdmin(admin.ModelAdmin):  
 
     TEXT = "Click on to 'hide' to hide this section."
 
-    list_display = ['name', 'surname', 'middlename', 'patient_ID', 'age', 'created_at', 'updated_at', 'image_tag']
+    list_display = ['name', 'surname', 'middlename', 'patient_ID', 'age', 'created_at', 'updated_at']
     list_filter = ['name', 'surname', 'patient_ID']
     fieldsets = (
         ('Basic Info', {
@@ -32,13 +28,7 @@ class PatientAdmin(admin.ModelAdmin):
             'classes': ('collapse',),
             'description': '%s' % TEXT,
         }),
-        ('Image', {
-            'fields': ['image', 'image_tag'],
-            'classes': ('collapse',),
-            'description': '%s' % TEXT,
-        }),
     )
-    readonly_fields = ['image_tag']
 
 
 class PatientExaminationAdmin(admin.ModelAdmin):
@@ -51,6 +41,11 @@ class PatientHistoryAdmin(admin.ModelAdmin):
     list_filter = ['patient', 'doctor']
 
 
+class TestmodelAdmin(admin.ModelAdmin):
+    list_display = ['name', 'surname']
+
+
 admin.site.register(Patient, PatientAdmin)
 admin.site.register(PatientExamination, PatientExaminationAdmin)
 admin.site.register(PatientHistory, PatientHistoryAdmin)
+admin.site.register(Testmodel, TestmodelAdmin)

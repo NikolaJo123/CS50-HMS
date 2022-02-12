@@ -18,7 +18,6 @@ class Patient(models.Model):
     address = models.CharField(blank=True, max_length=200)
     city = models.CharField(blank=True, max_length=50)
     country = models.CharField(blank=True, max_length=50)
-    image = models.ImageField(blank=True, upload_to='images/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -46,4 +45,9 @@ class PatientHistory(models.Model):
 
     def __str__(self):
         return self.patient.name
+
+
+class Testmodel(models.Model):
+    name = models.CharField(max_length=30)
+    surname = models.CharField(max_length=30)
 
