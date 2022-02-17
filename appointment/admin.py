@@ -9,8 +9,8 @@ from .models import Appointment
 
 class AppointmentAdmin(admin.ModelAdmin):
 
-    list_display = ['patient', 'patient_personal_ID', 'clinic', 'doctor', 'appointed_by']
-    list_filter = ['patient', 'patient_personal_ID', 'clinic', 'doctor', 'appointed_by']
+    list_display = ['patient', 'patient_personal_ID', 'clinic', 'doctor', 'scheduled_by']
+    list_filter = ['patient', 'patient_personal_ID', 'clinic', 'doctor', 'scheduled_by']
     
 
 
