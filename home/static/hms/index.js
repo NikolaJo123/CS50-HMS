@@ -146,10 +146,8 @@ function create_table(patients){
         const patient = document.createElement('tr')
         patient.classList.add('patient')
 
-        //if (patient.name == null)
-
-        if(patients[i].name === null ){
-            return patients[i].name = '-';
+        if(patients[i].middlename === null ){
+            patients[i].middlename = '-'
         }
 
         patient.innerHTML = `
