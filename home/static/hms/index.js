@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#patientslist').addEventListener('click', () => load_view_patients());
     document.querySelector('#archivedpatiets').addEventListener('click', () => load_archived_patients());
 
-    //document.querySelector('#register-form').onsubmit = register_patient;
+    document.querySelector('#register-form').onsubmit = register_patient;
 
     inbox.style.display = 'block';
     patienstview.style.display = 'none';
@@ -71,7 +71,7 @@ function register_patient (){
     var country = document.querySelector('#register-country').value;
 
 
-    fetch('/register_patient/', {
+    fetch('register_patient/', {
         method: 'POST',
         body: JSON.stringify({
             name: name,
