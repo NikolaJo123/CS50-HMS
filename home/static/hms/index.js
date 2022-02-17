@@ -1,44 +1,59 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     // Views global variables
-    var inbox = document.querySelector('#dashboardview')
-    var patienstview = document.querySelector('#patientsview')
-    var registerview = document.querySelector('#registerview')
+    var inbox = document.querySelector('#appointmentview');
+    var patienstview = document.querySelector('#patientsview');
+    var registerview = document.querySelector('#registerview');
+    var archied = document.querySelector('#archivedview');
 
 
     // Use buttons to toggle between views
-    document.querySelector('#dashboard').addEventListener('click', () => load_dashboard());
+    document.querySelector('#patientappointment').addEventListener('click', () => load_patient_appointment());
     document.querySelector('#registration').addEventListener('click', () => load_register_patients());
     document.querySelector('#patientslist').addEventListener('click', () => load_view_patients());
+    document.querySelector('#archivedpatiets').addEventListener('click', () => load_archived_patients());
 
-    document.querySelector('#register-form').onsubmit = register_patient;
+    //document.querySelector('#register-form').onsubmit = register_patient;
 
     inbox.style.display = 'block';
     patienstview.style.display = 'none';
     registerview.style.display = 'none';
+    archied.style.display = 'none';
 
     get_patients();
+    searching();
+
 });
 
 
-function load_dashboard (){
-    document.querySelector('#dashboardview').style.display = 'block';
+function load_patient_appointment (){
+    document.querySelector('#appointmentview').style.display = 'block';
     document.querySelector('#patientsview').style.display = 'none';
     document.querySelector('#registerview').style.display = 'none';
+    document.querySelector('#archivedview').style.display = 'none';
 }
 
 
 function load_register_patients (){
-    document.querySelector('#dashboardview').style.display = 'none';
+    document.querySelector('#appointmentview').style.display = 'none';
     document.querySelector('#patientsview').style.display = 'none';
     document.querySelector('#registerview').style.display = 'block';
+    document.querySelector('#archivedview').style.display = 'none';
 }
 
 
 function load_view_patients (){
-    document.querySelector('#dashboardview').style.display = 'none';
+    document.querySelector('#appointmentview').style.display = 'none';
     document.querySelector('#patientsview').style.display = 'block';
-    document.querySelector('#registerview').style.display = 'none';    
+    document.querySelector('#registerview').style.display = 'none';
+    document.querySelector('#archivedview').style.display = 'none';    
+}
+
+
+function load_archived_patients (){
+    document.querySelector('#appointmentview').style.display = 'none';
+    document.querySelector('#patientsview').style.display = 'none';
+    document.querySelector('#registerview').style.display = 'none';
+    document.querySelector('#archivedview').style.display = 'block';    
 }
 
 
@@ -85,29 +100,77 @@ function get_patients() {
     .then(patients => {
         console.log(patients)
 
-        const patient = document.createElement('div')
+        create_table(patients);
 
-        for (let i of Object.keys(patients)) {
-            const patient = document.createElement('div')
-            patient.classList.add('patient')
-
-            patient.innerHTML = `
-                <div>${patients[i].name}</div>
-                <div>${patients[i].surname}</div>
-                <div>${patients[i].middlename}</div>
-                <div>${patients[i].patient_ID}</div>
-                <div>${patients[i].birthdate}</div>
-                <div>${patients[i].phone}</div>
-                <div>${patients[i].mobile}</div>
-                <div>${patients[i].email}</div>
-                <div>${patients[i].address}</div>
-                <div>${patients[i].city}</div>
-                <div>${patients[i].country}</div>
-            `;
-            const temp = document.getElementById("patientsview");
-            temp.insertBefore(patient, temp.childNodes[0]);
-
-            document.querySelector('#patientsview').append(patient);
-        };
     });
 }
+
+
+function searching(){
+    $('#search-input').on('keyup', function(){
+        var value = $(this).val()
+
+        fetch(`patient/`)
+        .then(response => response.json())
+        .then(patients => {
+            var data = search(value, patients)
+
+            create_table(data);
+
+        });
+
+    })
+
+    function search(value, data) {
+        var filterData = []
+
+        for(var i = 0; i < data.length; i++){
+            value = value.toLowerCase()
+            var name = data[i].name.toLowerCase()
+
+            if(name.includes(value)){
+                filterData.push(data[i])
+            }
+        }
+        return filterData
+    }
+}
+
+
+function create_table(patients){
+    var table = document.querySelector('#patrow');
+
+    table.innerHTML = ''
+    
+    for (let i of Object.keys(patients)) {
+        const patient = document.createElement('tr')
+        patient.classList.add('patient')
+
+        //if (patient.name == null)
+
+        if(patients[i].name === null ){
+            return patients[i].name = '-';
+        }
+
+        patient.innerHTML = `
+            <td><div class="form-check">
+            <input type="checkbox" class="form-check-input" id="box${patients[i].id}">
+            </div></td>
+            <td>${patients[i].id}</td>
+            <td><a href="/">${patients[i].name}</a></td>
+            <td>${patients[i].surname}</td>
+            <td>${patients[i].middlename}</td>
+            <td>${patients[i].patient_ID}</td>
+            <td>${patients[i].birthdate}</td>
+            <td>${patients[i].phone}</td>
+            <td>${patients[i].mobile}</td>
+            <td>${patients[i].email}</td>
+            <td>${patients[i].address}</td>
+            <td>${patients[i].city}</td>
+            <td>${patients[i].country}</td>
+        `;
+
+        table.append(patient);
+    };
+}
+
