@@ -37,11 +37,6 @@ class Speciality(models.Model):
 
 
 class Employee(Location, UserContact):
-    '''STATUS = (
-        ('Active', 'Active'),
-        ('Inactive', 'Inactive'),
-        ('Blocked', 'Blocked')
-    )'''
 
     class StatusChoice(models.TextChoices):
         ACTIVE = 'Ac', _('Active')
