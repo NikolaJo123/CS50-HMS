@@ -28,6 +28,11 @@ def index(request):
     return render(request, 'index.html', context)
 
 
+def patients(request):
+    
+    return render(request, 'patient.html', {})
+
+
 def patient(request):
     if request.method == 'GET':
         patients = Patient.objects.all()
