@@ -108,8 +108,85 @@
                 </div>
 
                 <div id="registerview">
-                    Register
-                </div>
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">Register a patient</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form id="register-form" class="needs-validation" method="post" enctype=multipart/form-data>
+                                <div id="message"></div>
+                                {% csrf_token %}
+                                <!--{{ form.as_p }}-->
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputName">Name</label>
+                                            <input name="name" class="form-control" id="register-name" placeholder="Name" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputSurname">Surnmae</label>
+                                            <input name="surname" class="form-control" id="register-surname"   placeholder="Surname" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputMiddlename">Middlename</label>
+                                            <input  name="middlename" class="form-control" id="register-middlename"   placeholder="Middlename">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPersonalID">Personal ID</label>
+                                            <input  name="patient_ID" class="form-control" id="register-patient-id"   placeholder="Patient ID" required>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Date</label>
+                                            <div class="input-group date" id="register-birthdate-group" name="birthdaygroup" data-target-input="nearest">
+                                                <input type="date" class="form-control datetimepicker-input" id="register-birthdate" name="birthday">
+                                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPhone">Phone</label>
+                                            <input name="phone" class="form-control" id="register-phone" placeholder="Phone" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputMobile">Mobile</label>
+                                            <input name="mobile" class="form-control" id="register-mobile" placeholder="Mobile" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputEmail">Email</label>
+                                            <input type="email" name="email" class="form-control" id="register-email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputAddress">Address</label>
+                                            <input name="address" class="form-control" id="register-address" placeholder="Address" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputCity">City</label>
+                                            <input name="city" class="form-control" id="register-city" placeholder="City" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputCountry">Country</label>
+                                            <input name="country" class="form-control" id="register-country" placeholder="Country">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                
+                                <div class="card-footer card-outline card-tabs">
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                            <!-- /.card -->
+                    </div>
 
                 <div id="archivedview">
                     Archived
