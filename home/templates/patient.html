@@ -1,0 +1,127 @@
+{% extends 'homebase.html' %}
+
+{% load static %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+
+{% block body %}
+
+    <div class="content-wrapper">
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                    <h1 class="m-0 text-dark">Patients Board</h1>
+                    </div><!-- /.col -->
+                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="col-12 col-sm-12">
+                    <div class="card card-primary card-outline card-tabs">
+                        <div class="card-header p-0 pt-1 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a name="app" class="nav-link active" id="patientappointment" data-toggle="pill" href="" role="tab" aria-selected="true">Appointment</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="patientslist" data-toggle="pill" href="" role="tab" aria-selected="false">Patients List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="registration" data-toggle="pill" href="" role="tab" aria-selected="false">Patient Registration</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="archivedpatiets" data-toggle="pill" href="" role="tab" aria-selected="false">Archived</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div id="appointmentview">
+                    Home
+                </div>
+
+                <div id="patientsview">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <select class="">
+                                        <option selected>Select Action</option>
+                                        <option value="1">Edit</option>
+                                        <option value="2">Archive</option>
+                                        <option value="3">Delete</option>
+                                    </select>
+
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search" id="search-input">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap" id="pattable">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Surname</th>
+                                                <th>Middlename</th>
+                                                <th>Personal ID</th>
+                                                <th>Birthdate</th>
+                                                <th>Phone</th>
+                                                <th>Mobile</th>
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th>City</th>
+                                                <th>Country</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="patrow">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="registerview">
+                    Register
+                </div>
+
+                <div id="archivedview">
+                    Archived
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'hms/index.js' %}"></script>
+{% endblock %}
