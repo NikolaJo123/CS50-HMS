@@ -101,6 +101,7 @@ function get_patients() {
         console.log(patients)
 
         create_table(patients);
+        archived_table(patients);
 
     });
 }
@@ -116,6 +117,7 @@ function searching(){
             var data = search(value, patients)
 
             create_table(data);
+            archived_table(data);
 
         });
 
@@ -139,6 +141,7 @@ function searching(){
 
 function create_table(patients){
     var table = document.querySelector('#patrow');
+    //var arch_table = document.querySelector('#archived');
 
     table.innerHTML = ''
     
@@ -169,6 +172,43 @@ function create_table(patients){
         `;
 
         table.append(patient);
+        //arch_table.append(patient);
+    };
+}
+
+
+function archived_table(patients){
+    var arch_table = document.querySelector('#archived');
+
+    arch_table.innerHTML = ''
+    
+    for (let i of Object.keys(patients)) {
+        const patient = document.createElement('tr')
+        patient.classList.add('patient')
+
+        if(patients[i].middlename === null ){
+            patients[i].middlename = '-'
+        }
+
+        patient.innerHTML = `
+            <td><div class="form-check">
+            <input type="checkbox" class="form-check-input" id="box${patients[i].id}">
+            </div></td>
+            <td>${patients[i].id}</td>
+            <td><a href="/">${patients[i].name}</a></td>
+            <td>${patients[i].surname}</td>
+            <td>${patients[i].middlename}</td>
+            <td>${patients[i].patient_ID}</td>
+            <td>${patients[i].birthdate}</td>
+            <td>${patients[i].phone}</td>
+            <td>${patients[i].mobile}</td>
+            <td>${patients[i].email}</td>
+            <td>${patients[i].address}</td>
+            <td>${patients[i].city}</td>
+            <td>${patients[i].country}</td>
+        `;
+
+        arch_table.append(patient);
     };
 }
 
