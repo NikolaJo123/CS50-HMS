@@ -1,4 +1,4 @@
-h1 {
+/*h1 {
     color: blue;
     text-align: center; 
     margin-top: 3%; 
@@ -8,4 +8,11 @@ h1 {
 img {
     width: 50px;
     height: 60px;
+}*/
+
+#bb {
+	text-align: center;
+	/*position: relative;*/
+	color: blue;
+	font-family: sans-serif;
 }
