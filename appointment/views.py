@@ -7,4 +7,4 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 def appointment(request):
-    return HttpResponse('Hello World!')
+    return render(request, 'appointment.html', {})
