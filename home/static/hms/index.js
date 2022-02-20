@@ -1,40 +1,28 @@
 document.addEventListener('DOMContentLoaded', function () {
     // Views global variables
-    var inbox = document.querySelector('#appointmentview');
     var patienstview = document.querySelector('#patientsview');
     var registerview = document.querySelector('#registerview');
     var archied = document.querySelector('#archivedview');
 
 
     // Use buttons to toggle between views
-    document.querySelector('#patientappointment').addEventListener('click', () => load_patient_appointment());
     document.querySelector('#registration').addEventListener('click', () => load_register_patients());
     document.querySelector('#patientslist').addEventListener('click', () => load_view_patients());
     document.querySelector('#archivedpatiets').addEventListener('click', () => load_archived_patients());
 
     document.querySelector('#register-form').onsubmit = register_patient;
 
-    inbox.style.display = 'block';
-    patienstview.style.display = 'none';
+    patienstview.style.display = 'block';
     registerview.style.display = 'none';
     archied.style.display = 'none';
 
     get_patients();
     searching();
-
+    
 });
 
 
-function load_patient_appointment (){
-    document.querySelector('#appointmentview').style.display = 'block';
-    document.querySelector('#patientsview').style.display = 'none';
-    document.querySelector('#registerview').style.display = 'none';
-    document.querySelector('#archivedview').style.display = 'none';
-}
-
-
 function load_register_patients (){
-    document.querySelector('#appointmentview').style.display = 'none';
     document.querySelector('#patientsview').style.display = 'none';
     document.querySelector('#registerview').style.display = 'block';
     document.querySelector('#archivedview').style.display = 'none';
@@ -42,7 +30,6 @@ function load_register_patients (){
 
 
 function load_view_patients (){
-    document.querySelector('#appointmentview').style.display = 'none';
     document.querySelector('#patientsview').style.display = 'block';
     document.querySelector('#registerview').style.display = 'none';
     document.querySelector('#archivedview').style.display = 'none';    
@@ -50,7 +37,6 @@ function load_view_patients (){
 
 
 function load_archived_patients (){
-    document.querySelector('#appointmentview').style.display = 'none';
     document.querySelector('#patientsview').style.display = 'none';
     document.querySelector('#registerview').style.display = 'none';
     document.querySelector('#archivedview').style.display = 'block';    
@@ -117,6 +103,19 @@ function searching(){
             var data = search(value, patients)
 
             create_table(data);
+
+        });
+
+    })
+
+    $('#archived_search').on('keyup', function(){
+        var value = $(this).val()
+
+        fetch(`patient/`)
+        .then(response => response.json())
+        .then(patients => {
+            var data = search(value, patients)
+
             archived_table(data);
 
         });
@@ -141,7 +140,6 @@ function searching(){
 
 function create_table(patients){
     var table = document.querySelector('#patrow');
-    //var arch_table = document.querySelector('#archived');
 
     table.innerHTML = ''
     
@@ -172,7 +170,6 @@ function create_table(patients){
         `;
 
         table.append(patient);
-        //arch_table.append(patient);
     };
 }
 
@@ -184,7 +181,7 @@ function archived_table(patients){
     
     for (let i of Object.keys(patients)) {
         const patient = document.createElement('tr')
-        patient.classList.add('patient')
+        patient.classList.add('archivedpatient')
 
         if(patients[i].middlename === null ){
             patients[i].middlename = '-'
