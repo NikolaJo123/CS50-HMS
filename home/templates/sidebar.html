@@ -16,7 +16,7 @@
                 <img src="{% static 'assets/img/user2-160x160.jpg' %}" class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="" class="d-block">
+                <a href="/profile" class="d-block">
                     {{ request.user.username }}
                 </a>
             </div>
@@ -42,6 +42,46 @@
                         <a href="/patients" class="nav-link ">
                             <i class="far fas fa-user nav-icon"></i>
                             <p>Patients Board</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/appointment" class="nav-link ">
+                            <i class="far fas fa-calendar nav-icon"></i>
+                            <p>Appointment</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/medicalstaff" class="nav-link ">
+                            <i class="far fas fa-user-md nav-icon"></i>
+                            <p>Medical Staff</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/clinics" class="nav-link ">
+                            <i class="far fas fa-hospital nav-icon"></i>
+                            <p>Clinics</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/lab" class="nav-link ">
+                            <i class="far fas fa-flask nav-icon"></i>
+                            <p>Laboratory</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/payment" class="nav-link ">
+                            <i class="far fas fa-credit-card nav-icon"></i>
+                            <p>Payment</p>
                         </a>
                     </li>
                 </li>
