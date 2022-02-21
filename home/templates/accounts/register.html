@@ -24,8 +24,7 @@
   <div class="register-box">
 
     <div class="login-logo">
-        <a target="_blank" rel="noopener noreferrer" 
-           href="https://appseed.us/admin-dashboards/django-dashboard-adminlte">Django <b>Admin</b>LTE</a>
+        <a target="_blank" rel="noopener noreferrer"  href="https://docs.djangoproject.com/en/4.0/">Grace <b>Medical</b>Clinic</a>
     </div>    
 
     <div class="card">
@@ -43,6 +42,26 @@
         <form role="form" method="post" action="">
 
           {% csrf_token %}
+
+          <div class="input-group mb-3">
+            {{ form.first_name }}
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <span class="text-error">{{ form.first_name.errors }}</span>
+
+          <div class="input-group mb-3">
+            {{ form.last_name }}
+            <div class="input-group-append">
+              <div class="input-group-text">
+                <span class="fas fa-user"></span>
+              </div>
+            </div>
+          </div>
+          <span class="text-error">{{ form.last_name.errors }}</span>
 
           <div class="input-group mb-3">
             {{ form.username }}
