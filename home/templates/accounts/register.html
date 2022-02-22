@@ -83,6 +83,17 @@
           </div>
           <span class="text-error">{{ form.email.errors }}</span>
 
+          <div class="form-group col-md-8">
+            <label for="exampleSelectPatient">Select your position</label>
+            <select name="role" class="form-control" required>
+                <option value="none" selected>None</option>
+                {% for group in group_list %}
+                  <option value="{{ group.name }}">{{ group.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+
           <div class="input-group mb-3">
             {{ form.password1 }}
             <div class="input-group-append">
