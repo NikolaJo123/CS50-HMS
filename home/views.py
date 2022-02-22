@@ -40,24 +40,29 @@ def index(request):
 
 def login_view(request):
     form = LoginForm(request.POST or None)
-
     msg = None
+    current_user = request.user
 
-    if request.method == "POST":
 
-        if form.is_valid():
-            username = form.cleaned_data.get("username")
-            password = form.cleaned_data.get("password")
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect("/")
+    if current_user.is_authenticated:
+        return HttpResponseRedirect('/')
+    else:
+
+        if request.method == "POST":
+
+            if form.is_valid():
+                username = form.cleaned_data.get("username")
+                password = form.cleaned_data.get("password")
+                user = authenticate(username=username, password=password)
+                if user is not None:
+                    login(request, user)
+                    return redirect("/")
+                else:
+                    msg = 'Invalid credentials'
             else:
-                msg = 'Invalid credentials'
-        else:
-            msg = 'Error validating the form'
+                msg = 'Error validating the form'
 
-    return render(request, "accounts/login.html", {"form": form, "msg": msg})
+        return render(request, "accounts/login.html", {"form": form, "msg": msg})
 
 
 def logout_view(request):
@@ -68,51 +73,32 @@ def logout_view(request):
 def register(request):
     msg = None
     success = False
-    
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
+    current_user = request.user
 
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
+    if current_user.is_authenticated:
+        return HttpResponseRedirect('/')
+    else:
 
-            msg = 'User created successfully!'
-            success = True
+        if request.method == "POST":
+            form = SignUpForm(request.POST)
 
-            return HttpResponseRedirect('/')
+            if form.is_valid():
+                form.save()
+                username = form.cleaned_data.get("username")
+                raw_password = form.cleaned_data.get("password1")
+                user = authenticate(username=username, password=raw_password)
+                login(request, user)
+
+                msg = 'User created successfully!'
+                success = True
+
+                return HttpResponseRedirect('/')
+            else:
+                msg = 'Invalid Credentials!'
         else:
-            msg = 'Invalid Credentials!'
-    else:
-        form = SignUpForm()
-    
-    return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
-
-
-    '''# Ensure password matches confirmation
-        password = request.POST["password"]
-        confirmation = request.POST["confirmation"]
-        if password != confirmation:
-            return render(request, "accounts/register.html", {
-                "message": "Passwords must match."
-            })
-
-        # Attempt to create new user
-        try:
-            user = User.objects.create_user(email, email, password)
-            user.save()
-        except IntegrityError as e:
-            print(e)
-            return render(request, "accounts/register.html", {
-                "message": "Email address already taken."
-            })
-        login(request, user)
-        return HttpResponseRedirect(reverse("index"))
-    else:
-        return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})'''
-    
+            form = SignUpForm()
+        
+        return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
 
 
 def patients(request):
