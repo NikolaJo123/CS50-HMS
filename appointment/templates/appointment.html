@@ -107,7 +107,7 @@
                         <div class="container-fluid">
                             <div class="col-md-12">
                                 <!-- general form elements -->
-                                <div class="card">
+                                <div class="card card-primary card-outline card-tabs" style="background-color: #e6ffe6;">
                                     <div class="card-header">
                                         <h3 class="card-title">Schedule an appointment</h3>
                                     </div>
@@ -121,11 +121,13 @@
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
                                                     <label for="exampleSelectPatient">Patient</label>
-                                                    <select class="">
+                                                    <select class="form-control">
                                                         <option selected>Select Patient</option>
-                                                        <option value="1">Edit</option>
-                                                        <option value="2">Archive</option>
-                                                        <option value="3">Delete</option>
+                                                        <option value="">option 1</option>
+                                                        <option value="">option 2</option>
+                                                        <option value="">option 3</option>
+                                                        <option value="">option 4</option>
+                                                        <option value="">option 5</option>
                                                     </select>
                                                 </div>
                                                 <div class="form-group col-md-4">
@@ -135,6 +137,26 @@
                                             </div>
                                             <div class="form-row">
                                                 <div class="form-group col-md-4">
+                                                    <label for="exampleSelectDoctor">Doctor</label>
+                                                    <select class="form-control col-md-8">
+                                                        <option selected>Select Doctor</option>
+                                                        <option value="1">Edit</option>
+                                                        <option value="2">Archive</option>
+                                                        <option value="3">Delete</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleSelectClinik">Clinik</label>
+                                                    <select class="form-control col-md-4">
+                                                        <option selected>Select Clinic</option>
+                                                        <option value="1">Edit</option>
+                                                        <option value="2">Archive</option>
+                                                        <option value="3">Delete</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
                                                     <label for="exampleInputTime">Time</label>
                                                     <input  name="middlename" class="form-control" id="schedule-time" placeholder="Enter time">
                                                 </div>
@@ -149,30 +171,10 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="form-row">
-                                                <div class="form-group col-md-4">
-                                                    <label for="exampleSelectDoctor">Doctor</label>
-                                                    <select class="">
-                                                        <option selected>Select Doctor</option>
-                                                        <option value="1">Edit</option>
-                                                        <option value="2">Archive</option>
-                                                        <option value="3">Delete</option>
-                                                    </select>
-                                                </div>
-                                                <div class="form-group col-md-4">
-                                                    <label for="exampleSelectClinik">Clinik</label>
-                                                    <select class="">
-                                                        <option selected>Select Clinic</option>
-                                                        <option value="1">Edit</option>
-                                                        <option value="2">Archive</option>
-                                                        <option value="3">Delete</option>
-                                                    </select>
-                                                </div>
-                                            </div>
                                             <div class="form-fow">
                                                 <label for="exampleSelectScheduled">Scheduled by</label>
-                                                <select class="">
-                                                    <option selected>Select Clinic</option>
+                                                <select class="form-control col-md-3">
+                                                    <option selected>Select Personnel</option>
                                                     <option value="1">Edit</option>
                                                     <option value="2">Archive</option>
                                                     <option value="3">Delete</option>
@@ -184,7 +186,7 @@
                                                     <textarea name="AppointmentReason" class="form-control" id="app-reason" rows="4" cols="50" required></textarea>
                                                 </div>
                                                 <div class="form-group col-md-4">
-                                                    <label for="exampleReAppointmentReason">Appointment Reason</label>
+                                                    <label for="exampleReAppointmentReason">Re-appointment Reason</label>
                                                     <textarea name="ReAppointmentReason" class="form-control" id="reapp-reason" rows="4" cols="50"></textarea>
                                                 </div>
                                             </div>
