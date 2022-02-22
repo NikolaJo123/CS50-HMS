@@ -36,8 +36,8 @@ class Speciality(models.Model):
         return self.department
 
 
-class Employee(Location, UserContact):
-
+class Employee(models.Model):
+    
     class StatusChoice(models.TextChoices):
         ACTIVE = 'Ac', _('Active')
         INACTIVE = 'IA', _('Inactive')
@@ -56,6 +56,6 @@ class Employee(Location, UserContact):
     updated_info = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.user.first_name
 
 
