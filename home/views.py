@@ -9,7 +9,7 @@ from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from core.decorators import unauthenticated_user
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 
 from .forms import LoginForm, SignUpForm
 
@@ -71,26 +71,37 @@ def register(request):
     msg = None
     success = False
 
+    group_list = Group.objects.all()
+
     if request.method == "POST":
         form = SignUpForm(request.POST)
 
         if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get("username")
-            raw_password = form.cleaned_data.get("password1")
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
+            group_choice = request.POST["role"]
 
-            msg = 'User created successfully!'
-            success = True
+            if group_choice == 'none':
+                msg = 'You need to Enter your medical position in order to continue!'
 
-            return HttpResponseRedirect('/')
+            else:
+                user = form.save()
+                username = form.cleaned_data.get("username")
+                raw_password = form.cleaned_data.get("password1")
+                reg_user = authenticate(username=username, password=raw_password)
+                
+                group = Group.objects.get(name=group_choice)
+                user.groups.add(group)
+                login(request, reg_user)
+
+                msg = 'User created successfully!'
+                success = True
+
+                return HttpResponseRedirect('/')
         else:
             msg = 'Invalid Credentials!'
     else:
         form = SignUpForm()
     
-    return render(request, "accounts/register.html", {"form": form, "msg": msg, "success": success})
+    return render(request, "accounts/register.html", {"form": form, 'group_list': group_list, "msg": msg, "success": success})
 
 
 def patients(request):
