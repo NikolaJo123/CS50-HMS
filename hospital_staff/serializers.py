@@ -11,15 +11,18 @@ class SpecialitySerializer(serializers.ModelSerializer):
 
 
 class EmployeeSerializer(serializers.ModelSerializer):
-    employee_name = serializers.CharField(source='user.username')
+    employee_name = serializers.CharField(source='user.first_name')
     employee_surname = serializers.CharField(source='user.last_name')
-    role = serializers.CharField(source='role.title')
-    speciality = serializers.CharField(source='speciality.department')
+    role_title = serializers.CharField(source='role.title')
+    speciality_name = serializers.CharField(source='speciality.department')
+    cninic_name = serializers.CharField(source='clinic.department_name')
 
     class Meta:
         model = Employee
-        fields = ('id', 'user', 'employee_name', 'employee_surname', 'middlename', 
-                'role', 'speciality', 'personal_ID_number', 'status', 'birthdate',
+        fields = ('user', 'employee_name', 'employee_surname', 'middlename', 
+                'role', 'role_title', 'speciality', 'speciality_name', 'clinic', 'cninic_name',
+                'personal_ID_number', 'status', 'birthdate',
+                'email', 'phone', 'mobile', 'address', 'city', 'country',
                 'user_image', 'employed', 'updated_info')
 
 

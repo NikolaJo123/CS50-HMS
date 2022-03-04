@@ -2,6 +2,9 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
+from hospital_staff.models import Employee, Speciality, Staff
+from clinics.models import Department
+
 
 class LoginForm(forms.Form):
     username = forms.CharField(
@@ -67,3 +70,11 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username', 'email', 'password1', 'password2')
+
+
+class EmployeeForm(UserCreationForm):
+
+    class Meta:
+        model = Employee
+        fields = ('role', 'speciality', 'clinic')
+

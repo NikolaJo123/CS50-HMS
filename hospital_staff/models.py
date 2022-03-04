@@ -2,9 +2,11 @@ from django.db import models
 from mptt.fields import TreeForeignKey
 from mptt.models import MPTTModel
 from django.utils.translation import gettext_lazy as _
+from django.utils.safestring import mark_safe
 
 from django.contrib.auth.models import User
 from core.models import Location, UserContact
+from clinics.models import Department
 
 
 # Create your models here.
@@ -36,7 +38,7 @@ class Speciality(models.Model):
         return self.department
 
 
-class Employee(models.Model):
+class Employee(Location, UserContact):
     
     class StatusChoice(models.TextChoices):
         ACTIVE = 'Ac', _('Active')
@@ -45,8 +47,9 @@ class Employee(models.Model):
 
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     middlename = models.CharField(max_length=30, blank=True, null=True)
-    role = models.ForeignKey('hospital_staff.Staff', blank=True, on_delete=models.CASCADE)
-    speciality = models.ForeignKey('hospital_staff.Speciality', blank=True, null=True, on_delete=models.CASCADE)
+    role = models.ForeignKey('hospital_staff.Staff', on_delete=models.CASCADE)
+    speciality = models.ForeignKey('hospital_staff.Speciality', on_delete=models.CASCADE)
+    clinic = models.ForeignKey(Department, on_delete=models.CASCADE)
     personal_ID_number = models.CharField(max_length=15)
     status = models.CharField(max_length=10, choices=StatusChoice.choices, default=StatusChoice.ACTIVE)
     #employee_ID = models.CharField(max_length=10)
@@ -57,5 +60,15 @@ class Employee(models.Model):
 
     def __str__(self):
         return self.user.first_name
+    
+
+    def image_tag(self):
+        if self.user_image.url is not None:
+            return mark_safe('<img src="{}" width="auto" height="50px" />'.format(self.user_image.url))
+        else:
+            return ""
+    
+    image_tag.short_description = 'Image Preview'
+    image_tag.allow_tags = True
 
 

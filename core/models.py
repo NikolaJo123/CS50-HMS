@@ -6,9 +6,9 @@ from django.db import models
 
 class Location(models.Model):
     location_id = models.AutoField(primary_key=True)
-    address = models.CharField(blank=True, max_length=200)
-    city = models.CharField(blank=True, max_length=50)
-    country = models.CharField(blank=True, max_length=50)
+    address = models.CharField(blank=True, null=True, max_length=200)
+    city = models.CharField(blank=True, null=True, max_length=50)
+    country = models.CharField(blank=True, null=True, max_length=50)
 
 
 class UserContact(models.Model):

@@ -18,6 +18,8 @@ from django.urls import path, include
 #from home.views import index
 from home import views as HomeViews
 from appointment.views import appointment
+from hospital_staff.views import medicalstaff
+from clinics import views as ClinicView
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,4 +29,7 @@ urlpatterns = [
     path('patients/', HomeViews.patients, name='patients'),
     path('admin/', admin.site.urls),
     path('', include('appointment.urls')),
+    path('', include('hospital_staff.urls')),
+    path('', include('clinics.urls')),
+    
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

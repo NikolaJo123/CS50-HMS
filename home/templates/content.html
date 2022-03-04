@@ -23,10 +23,263 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-
+            <div class="row">
+                <div class="col-lg-3 col-6">
+                  <!-- small box -->
+                    <div class="small-box bg-info">
+                        <div class="inner">
+                            <h3>150</h3>      
+                            <p>Medical Staff</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-user-md"></i>
+                        </div>
+                        <a href="/medicalstaff" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-success">
+                        <div class="inner">
+                            <!--<h3>53<sup style="font-size: 20px">%</sup></h3>-->
+                            <h3>53</h3>
+                            <p>Total Clinics</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-hospital"></i>
+                        </div>
+                        <a href="/clinics" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-warning">
+                        <div class="inner">
+                            <h3 id="patnum">0</h3>
+                            <p>Patient Registrations</p>
+                        </div>
+                        <div class="icon">
+                            <i class="ion ion-person-add"></i>
+                        </div>
+                        <a href="/patients" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+                <div class="col-lg-3 col-6">
+                    <!-- small box -->
+                    <div class="small-box bg-danger">
+                        <div class="inner">
+                            <h3>65</h3>
+                            <p>Hospitalized Patients</p>
+                        </div>
+                        <div class="icon">
+                            <i class="fa fa-bed"></i>
+                        </div>
+                        <a href="/hospitalisation" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    </div>
+                </div>
+                <!-- ./col -->
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-success">
+                        <span class="info-box-icon"><i class="far fa-credit-card"></i></span>
+        
+                        <div class="info-box-content">
+                            <span class="info-box-text">Payments</span>
+                            <span class="info-box-number">41,410</span>
+                        </div>
+                        <a href="/payment" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                <div class="col-md-3 col-sm-6 col-12">
+                    <div class="info-box bg-warning">
+                        <span class="info-box-icon"><i class="far fa-calendar-alt"></i></span>
+        
+                        <div class="info-box-content">
+                            <span class="info-box-text">Appointments</span>
+                            <span class="info-box-number">41,410</span>
+                        </div>
+                        <a href="/patients" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>        
+                    <!-- /.info-box-content -->
+                    </div>
+                    <!-- /.info-box -->
+                </div>
+                <!-- /.col -->
+                
+            </div>
+            <div class="row">
+                <section class="col-lg-7 connectedSortable">
+                    <!-- Custom tabs (Charts with tabs)-->
+                    <div class="col-md-12 col-sm-6 col-12">
+                        <div class="card card-info">
+                            <div class="card-header">
+                                <h3 class="card-title">Payment Chart</h3>
+              
+                                <div class="card-tools">
+                                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart">
+                                    <canvas id="lineChart" style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
+                                </div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </section>
+                  <!-- /.Left col -->
+                  <!-- right col (We are only adding the ID to make the widgets sortable)-->
+                <section class="col-lg-5 connectedSortable">
+                    <div class="col-md-12 col-sm-6 col-12">
+                        <!-- Calendar -->
+                        <div class="card bg-gradient-success">
+                            <div class="card-header border-0">
+            
+                            <h3 class="card-title">
+                                <i class="far fa-calendar-alt"></i>
+                                Calendar
+                            </h3>
+                            <!-- tools card -->
+                            <div class="card-tools">
+                                <!-- button with a dropdown -->
+                                
+                                <button type="button" class="btn btn-success btn-sm" data-card-widget="collapse">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                
+                            </div>
+                            <!-- /. tools -->
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body pt-0">
+                            <!--The calendar -->
+                            <div id="calendar" style="width: 100%"></div>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </section>
+                  <!-- right col -->
+                </div>
+                <!-- /.row (main row) -->
+              </div><!-- /.container-fluid -->
+            </section>
+            </div>
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 
 </div>
+
+<script>
+    $(function () {
+      /* ChartJS
+       * -------
+       * Here we will create a few charts using ChartJS
+       */
+
+        var areaChartData = {
+        labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        datasets: [
+            {
+                label               : 'Registered Patietns',
+                backgroundColor     : 'rgba(60,141,188,0.9)',
+                borderColor         : 'rgba(60,141,188,0.8)',
+                pointRadius          : false,
+                pointColor          : '#3b8bba',
+                pointStrokeColor    : 'rgba(60,141,188,1)',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(60,141,188,1)',
+                data                : [28, 48, 40, 19, 86, 27, 90, 110, 23, 50, 83, 27]
+                },
+                {
+                label               : 'Payments',
+                backgroundColor     : 'rgba(210, 214, 222, 1)',
+                borderColor         : 'rgba(210, 214, 222, 1)',
+                pointRadius         : false,
+                pointColor          : 'rgba(210, 214, 222, 1)',
+                pointStrokeColor    : '#c1c7d1',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(220,220,220,1)',
+                data                : [65, 59, 80, 81, 56, 55, 40, 56, 72, 73, 54, 62]
+                },
+                {
+                label               : 'Appointments',
+                backgroundColor     : 'rgba(255, 255, 255, 1)',
+                borderColor         : 'rgba(255, 99, 71, 1)',
+                pointRadius         : false,
+                pointColor          : 'rgba(210, 214, 222, 1)',
+                pointStrokeColor    : '#c1c7d1',
+                pointHighlightFill  : '#fff',
+                pointHighlightStroke: 'rgba(220,220,220,1)',
+                data                : [63, 22, 23, 55, 90, 83, 57, 83, 67, 69, 73, 74]
+            },
+            ]
+        }
+
+        var areaChartOptions = {
+        maintainAspectRatio : false,
+        responsive : true,
+        legend: {
+            display: false
+        },
+        scales: {
+            xAxes: [{
+            gridLines : {
+                display : false,
+            }
+            }],
+            yAxes: [{
+            gridLines : {
+                display : false,
+            }
+            }]
+        }
+        }
+
+        // This will get the first returned node in the jQuery collection.
+    
+        //-------------
+        //- LINE CHART -
+        //--------------
+        var lineChartCanvas = $('#lineChart').get(0).getContext('2d')
+        var lineChartOptions = $.extend(true, {}, areaChartOptions)
+        var lineChartData = $.extend(true, {}, areaChartData)
+        lineChartData.datasets[0].fill = false;
+        lineChartData.datasets[1].fill = false;
+        lineChartOptions.datasetFill = false
+    
+        var lineChart = new Chart(lineChartCanvas, {
+            type: 'line',
+            data: lineChartData,
+            options: lineChartOptions
+        })
+    })
+    
+    $(function patnums () {
+        fetch(`patients/patient/`)
+        .then(response => response.json())
+        .then(patients => {
+
+            var patient = document.querySelector('#patnum');
+            var count = 0
+    
+            for (let i of Object.keys(patients)) {
+                count++
+            };
+            patient.innerHTML = count;
+        });
+    })
+  </script>
     

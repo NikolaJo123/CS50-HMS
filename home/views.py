@@ -19,7 +19,7 @@ from patient.serializers import *
 
 from clinics.models import Department
 
-from hospital_staff.models import Speciality, Employee, Staff
+from hospital_staff.models import Speciality, Staff, Employee
 
 from .serializers import *
 
@@ -52,6 +52,9 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
+                current_user =request.user
+                userprofile=Employee.objects.get(user_id=current_user.id)
+                request.session['userimage'] = userprofile.user_image.url
                 return redirect("/")
             else:
                 msg = 'Invalid credentials'
@@ -72,25 +75,52 @@ def register(request):
     success = False
 
     group_list = Group.objects.all()
+    role_list = Staff.objects.all()
+    speciality_list = Speciality.objects.all()
+    clinic_list = Department.objects.all()
 
     if request.method == "POST":
         form = SignUpForm(request.POST)
 
         if form.is_valid():
-            group_choice = request.POST["role"]
+            group_choice = request.POST["group"]
+            role_choice = request.POST["role"]
+            speciality_choice = request.POST["speciality"]
+            clinic_choice = request.POST["clinic"]
+            pesonal_ID = request.POST["id-number"]
 
             if group_choice == 'none':
-                msg = 'You need to Enter your medical position in order to continue!'
+                msg = 'You need to Enter your medical group in order to continue!'
+            
+            elif role_choice == 'none':
+                msg = 'You need to Enter your medical role in order to continue!'
+                
+            elif speciality_choice == 'none':
+                msg = 'You need to Enter your medical speciality in order to continue!'
+                
+            elif clinic_choice == 'none':
+                msg = 'You need to Enter your clinic in order to continue!'''
 
             else:
                 user = form.save()
                 username = form.cleaned_data.get("username")
                 raw_password = form.cleaned_data.get("password1")
                 reg_user = authenticate(username=username, password=raw_password)
-                
+
                 group = Group.objects.get(name=group_choice)
                 user.groups.add(group)
                 login(request, reg_user)
+                
+
+                current_user = request.user
+                employee = Employee()
+                employee.user_id = current_user.id
+                employee.personal_ID_number = pesonal_ID
+                employee.role_id = int(role_choice)
+                employee.speciality_id = int(speciality_choice)
+                employee.clinic_id = int(clinic_choice)
+                employee.user_image = 'images/emptyuser.jpg'
+                employee.save()
 
                 msg = 'User created successfully!'
                 success = True
@@ -101,7 +131,16 @@ def register(request):
     else:
         form = SignUpForm()
     
-    return render(request, "accounts/register.html", {"form": form, 'group_list': group_list, "msg": msg, "success": success})
+    context = {
+        "form": form,
+        'group_list': group_list,
+        'role_list': role_list,
+        'speciality_list': speciality_list,
+        'clinic_list': clinic_list,
+        "msg": msg,
+        "success": success
+        }
+    return render(request, "accounts/register.html", context)
 
 
 def patients(request):
@@ -155,3 +194,4 @@ def register_patient(request):
     register.save()
 
     return JsonResponse({"message": "Patient registered successfully"}, status=201)
+
