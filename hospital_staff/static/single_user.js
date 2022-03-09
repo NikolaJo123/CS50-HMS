@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Use buttons to toggle between views
-    //document.querySelector('#').addEventListener('click', () => load_profile());
+    document.querySelector('#close').addEventListener('click', () => load_profile());
     document.querySelector('#edit').addEventListener('click', () => load_edit());
 
     document.querySelector('#profileview').style.display = 'block';
@@ -21,6 +21,12 @@ function load_edit(){
 }
 
 
+function load_profile() {
+    document.querySelector('#profileview').style.display = 'block';
+    document.querySelector('#editview').style.display = 'none';
+}
+
+
 function get_profile(){
     fetch(`/getprofile/`)
     .then(response => response.json())
@@ -35,7 +41,7 @@ function get_profile(){
                 profile[i].name = 'No record'
             }
             if (profile[i].middlename === null){
-                profile[i].middlename = 'No record'
+                profile[i].middlename = ''
             }
             if (profile[i].employee_surname === null){
                 profile[i].employee_surname = 'No record'
@@ -96,8 +102,6 @@ function get_profile(){
             document.querySelector('#address').innerHTML = profile[i].address;
             document.querySelector('#city').innerHTML = profile[i].city;
             document.querySelector('#country').innerHTML = profile[i].country;
-
-
         };
 
     });

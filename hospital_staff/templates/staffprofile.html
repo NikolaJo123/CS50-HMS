@@ -41,7 +41,7 @@
                                         
                                     </div>
                     
-                                    <h3 class="profile-username text-center"><span id="name"></span>{{ request.user.first_name }} <span id="middlename"></span> <span id="surname">{{ request.user.last_name }}</span></h3>
+                                    <h3 class="profile-username text-center"><span id="name"></span> <span id="middlename"></span> <span id="surname"></span></h3>
                     
                                     <p class="text-muted text-center" id="title">My Title</p>
                     
@@ -124,7 +124,144 @@
                 </div>
 
                 <div id="editview">
-                    Edit view!
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card" style="background-color: #e6ffe6;">
+                            <div class="card-header">
+                                <h3 class="card-title">Edit profile page</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form id="" class="needs-validation" method="POST" enctype="multipart/form-data">
+                                <div id="message"></div>
+                                {% csrf_token %}
+                                <!--{{ form.as_p }}-->
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Username</label>
+                                                {{ user_form.username }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Name</label>
+                                                {{ user_form.first_name }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Surname</label>
+                                                {{ user_form.last_name }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Middlename</label>
+                                                {{ employee_form.middlename }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Identification</label>
+                                                {{ employee_form.personal_ID_number }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-12">
+                                                <label for="exampleInputName">Birthdate</label>
+                                                <div class="input-group date" id="edit-birthdate-group" name="birthdaygroup" data-target-input="nearest">
+                                                    {{ employee_form.birthdate }}
+                                                    <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                        <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Image</label>
+                                                {{ employee_form.user_image }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Speciality</label>
+                                                {{ employee_form.speciality }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Clinic</label>
+                                                {{ employee_form.clinic }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Role</label>
+                                                {{ employee_form.role }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Phone</label>
+                                                {{ contact_form.phone }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Mobile</label>
+                                                {{ contact_form.mobile }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Email</label>
+                                                {{ contact_form.email }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Address</label>
+                                                {{ location_form.address }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">City</label>
+                                                {{ location_form.city }}
+                                            </div>
+                                        </div>
+                                        <div>
+                                            <div class="form-group col-md-2">
+                                                <label for="exampleInputName">Country</label>
+                                                {{ location_form.country }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                                <!-- /.card-body -->
+                                
+                                <div class="card-footer card-outline card-tabs">
+                                    <button type="submit" class="btn btn-success">Save Changes</button>
+                                    <button type="button" id="close" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                            <!-- /.card -->
+                    </div>
                 </div>
 
             </div>

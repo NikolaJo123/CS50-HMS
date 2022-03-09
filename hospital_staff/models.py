@@ -61,6 +61,9 @@ class Employee(Location, UserContact):
     def __str__(self):
         return self.user.first_name
     
+    def __unicode__(self):
+        return u'%s' % (self.department)
+    
 
     def image_tag(self):
         if self.user_image.url is not None:

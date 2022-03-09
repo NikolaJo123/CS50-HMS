@@ -1,8 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 
 from .models import Staff, Employee
 from .serializers import StaffSerializer, EmployeeSerializer
+from .forms import UserUpdateForm, UserContactUpdateForm, UserLocationUpdateForm, UserEmployeeUpdateForm
+
+from core.models import Location, UserContact
 
 
 # Create your views here.
@@ -47,8 +50,41 @@ def employees(request):
 
 
 def user_profile(request):
+    contact = Employee.objects.get(user_id = request.user)
+    location = Employee.objects.get(user_id = request.user)
+    employee = Employee.objects.get(user_id = request.user)
+    user_form = UserUpdateForm(instance = request.user)
+    contact_form = UserContactUpdateForm(instance = contact)
+    location_form = UserLocationUpdateForm(instance = location)
+    employee_form = UserEmployeeUpdateForm(instance = employee)
+
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance = request.user)
+        contact_form = UserContactUpdateForm(request.POST, instance = employee)
+        location_form = UserLocationUpdateForm(request.POST, instance = employee)
+        employee_form = UserEmployeeUpdateForm(request.POST, request.FILES, instance = employee)
+
+        if (user_form.is_valid() and employee_form.is_valid()) and (location_form.is_valid() and contact_form.is_valid()):
+            user_form.save()
+            employee_form.save()
+            location_form.save()
+            contact_form.save()
+
+            return redirect('/profile')
+        else:
+            return HttpResponse("It doesn't work!!!")
+    else:
+        context = {
+            'contact_form': contact_form,
+            'location_form': location_form,
+            'employee_form': employee_form,
+            'user_form': user_form
+        }
+        return render(request, "staffprofile.html", context)
+
+
+def user_update(request):
     context = {
-        
     }
     return render(request, "staffprofile.html", context)
 
