@@ -53,8 +53,12 @@ def login_view(request):
             if user is not None:
                 login(request, user)
                 current_user =request.user
-                userprofile=Employee.objects.get(user_id=current_user.id)
-                request.session['userimage'] = userprofile.user_image.url
+                try:
+                    userprofile=Employee.objects.get(user_id=current_user.id)
+                    request.session['userimage'] = userprofile.user_image.url
+                except Employee.DoesNotExist:
+                    request.session['userimage'] = 'images/emptyuser.jpg'
+                
                 return redirect("/")
             else:
                 msg = 'Invalid credentials'
