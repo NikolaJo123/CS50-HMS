@@ -58,6 +58,8 @@ def login_view(request):
                     request.session['userimage'] = userprofile.user_image.url
                 except Employee.DoesNotExist:
                     request.session['userimage'] = 'images/emptyuser.jpg'
+                except ValueError:
+                    request.session['suerimage'] = 'images/emptyuser.jpg'
                 
                 return redirect("/")
             else:
