@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelector('#cancel').addEventListener('click', () => view_appointmets());
 
 
-    //document.querySelector('#examine-form').onsubmit = examine_patient;
+    document.querySelector('#examine-form').onsubmit = finish_treatment;
 
     patienstview.style.display = 'block';
     examview.style.display = 'none';
@@ -20,6 +20,8 @@ document.addEventListener('DOMContentLoaded', function () {
 function view_appointmets (){
     document.querySelector('#patientsview').style.display = 'block';
     document.querySelector('#examview').style.display = 'none';
+
+    //location.reload();
 }
 
 
@@ -139,5 +141,35 @@ function check_appointment(id){
             document.querySelector('#patient_id').value = treatment[i].patient;
         };
     });
+}
+
+
+function finish_treatment(){
+    let patient_status = document.querySelector('#patient_status').value;
+    let prescription = document.querySelector('#prescription').value;
+    let staff_sign = document.querySelector('#staff-sign').value;
+    let patient_id = document.querySelector('#patient_id').value;
+    var id_id = parseInt(patient_id);
+
+    var image_splits = staff_sign.split('fakepath\\');
+    console.log(image_splits[1]);
+
+    fetch(`finish/${id_id}`, {
+        method: 'POST',
+        body: JSON.stringify({
+            id: id_id,
+            patient_status: patient_status,
+            prescription: prescription,
+            staff_sign: image_splits[1],
+        })
+    })
+    .then(response => response.json())
+    .then(treatment => {
+        console.log(treatment)
+    });
+
+    view_appointmets()
+
+    return false;
 }
 
