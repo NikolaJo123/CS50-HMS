@@ -8,6 +8,7 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
+from appointment.views import appointment
 from core.decorators import unauthenticated_user
 from django.contrib.auth.models import User, Group
 
@@ -16,6 +17,9 @@ from .forms import LoginForm, SignUpForm
 from patient.forms import PatientForm
 from patient.models import Patient, PatientExamination, PatientHistory
 from patient.serializers import *
+
+from appointment.models import Appointment
+from appointment.serializers import AppointmentSerializer
 
 from clinics.models import Department
 
@@ -154,6 +158,41 @@ def patients(request):
     return render(request, 'patient.html', {})
 
 
+def treatment(request):
+    
+    return render(request, 'examination.html', {})
+
+
+def get_treatment(request):
+    if request.method == 'GET':
+        appointments = Appointment.objects.filter(doctor_id = request.user)
+        ser = AppointmentSerializer(appointments, many=True)
+        
+        return JsonResponse(ser.data, safe=False)
+    else:
+        return JsonResponse({"error": "GET request required."}, status=400)
+
+
+def get_single_treatment(request, id):
+    if request.method == 'GET':
+        appointments = Appointment.objects.filter(patient = id)
+        ser = AppointmentSerializer(appointments, many=True)
+        
+        return JsonResponse(ser.data, safe=False)
+    else:
+        return JsonResponse({"error": "GET request required."}, status=400)
+
+
+def get_single_patient(request, id):
+    if request.method == 'GET':
+        patient = Patient.objects.filter(id = id)
+        ser = PatientSerializer(patient, many=True)
+        
+        return JsonResponse(ser.data, safe=False)
+    else:
+        return JsonResponse({"error": "GET request required."}, status=400)
+
+
 def patient(request):
     if request.method == 'GET':
         patients = Patient.objects.all()
@@ -161,7 +200,7 @@ def patient(request):
         
         return JsonResponse(ser.data, safe=False)
     else:
-        return JsonResponse({"error": "POST request required."}, status=400)
+        return JsonResponse({"error": "GET request required."}, status=400)
 
 
 @csrf_exempt
