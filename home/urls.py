@@ -18,4 +18,5 @@ urlpatterns = [
     path('treatment/get_treatment/', views.get_treatment, name='get_treatment'),
     path('treatment/get_single_treatment/<int:id>', views.get_single_treatment, name='get_single_treatment'),
     path('treatment/get_single_patient/<int:id>', views.get_single_patient, name='get_single_patient'),
+    path('treatment/finish/<int:id>', views.finish, name='finish'),
 ]
