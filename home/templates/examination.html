@@ -1,0 +1,238 @@
+{% extends 'homebase.html' %}
+
+{% load static %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'hms/style.css' %}">
+
+{% endblock stylesheets %}
+
+
+{% block body %}
+
+    <div class="content-wrapper">
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Patients Examination</h1>
+                        </div>
+                    </div><!-- /.col -->
+                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="col-12 col-sm-12">
+                    
+                </div>
+
+                <div id="patientsview">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search" id="search-input">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap" id="pattable">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Surname</th>
+                                                <th>Middlename</th>
+                                                <th>Personal ID</th>
+                                                <th>Time/Date</th>
+                                                <th>Scheduled by</th>
+                                                <th>Scheduled at</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="patrow">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="examview">
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card" style="background-color: #e6ffe6;">
+                            <div class="card-header">
+                                <h3 class="card-title">Examine a patient</h3>
+                            </div>
+                            <!-- /.card-header -->
+
+                            <div class="col-md-12">
+                                <div class="card ">
+                                    
+                                    <div class="card-body">
+                                      <div class="tab-content">
+                                            <div class="active tab-pane" id="activity">
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <table class="table table-head-fixed text-nowrap" id="patientinfo">
+                                                            <tr>
+                                                                <td>
+                                                                    <div>
+                                                                        <label>Name:</label>
+                                                                        <span id="name" class="">No record</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>Surname:</label>
+                                                                        <span id="surname" class="">No record</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>Middlename:</label>
+                                                                        <span id="middlename" class="">No record</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>Patient ID:</label>
+                                                                        <span id="patid" class="">No record</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label>Date of birth:</label>
+                                                                        <span id="birth" class="">No record</span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+                                                                        <label>Email:</label>
+                                                                        <span id="email" class="">No record</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label class="">Phone:</label>
+                                                                        <span id="phone" class="">No record</span>
+                                                                    </div>
+                                                                    
+                                                                    <div>
+                                                                        <label>Mobile:</label>
+                                                                        <span id="mobile" class="">No record</span>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    <div>
+                                                                        <label class="">Address:</label>
+                                                                        <span id="address" class="">No record</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label class="">City:</label>
+                                                                        <span id="city" class="">No record</span>
+                                                                    </div>
+                                                                    <div>
+                                                                        <label class="">Country:</label>
+                                                                        <span id="country" class="">No record</span>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                        </div><!-- /.card-body -->
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <!-- form start -->
+                            <form id="examine-form" class="needs-validation" method="post" enctype=multipart/form-data>
+                                <div id="message"></div>
+                                {% csrf_token %}
+                                <!--{{ form.as_p }}-->
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4" style="display: none;">
+                                            <label for="exampleInputPatientStatus">Patient ID</label>
+                                            <input name="patient_status" class="form-control" id="patient_id" placeholder="patient ID" disabled>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPatientStatus">Appointment reason</label>
+                                            <input name="patient_status" class="form-control" id="reason" disabled>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputExamined">Re-appointment reason</label>
+                                            <input name="examined_from" class="form-control" id="re-reason" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPatientStatus">Patient Status</label>
+                                            <input name="patient_status" class="form-control" id="patient_status" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputExamined">Examined from</label>
+                                            <input name="examined_from" class="form-control" id="exafrom" value="{{ request.user.first_name }} {{ request.user.last_name }}" placeholder="Examined from" required>
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label for="exampleInputPrescription">Prescription</label>
+                                            <textarea name="prescription" class="form-control" id="prescription" rows="5" cols="10" required></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputStaffSign"></label>
+                                            <input type="file" name="staff_sign" id="staff-sign">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                
+                                <div class="card-footer card-outline card-tabs">
+                                    <button type="submit" class="btn btn-success">Submit</button>
+                                    <button type="button" id="cancel" class="btn btn-danger">Cancel</button>
+                                </div>
+                            </form>
+                        </div>
+                            <!-- /.card -->
+                    </div>
+                </div>
+
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'hms/examination.js' %}"></script>
+{% endblock %}
+
