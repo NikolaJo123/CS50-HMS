@@ -193,6 +193,35 @@ def get_single_patient(request, id):
         return JsonResponse({"error": "GET request required."}, status=400)
 
 
+@csrf_exempt
+@login_required
+def finish(request, id):
+    patient = Patient.objects.get(id = id)
+    if request.method != "POST":
+        return JsonResponse({"error": "POST request required."}, status=400)
+    
+    patientdata = json.loads(request.body)
+    patient_ID = patientdata.get('id', "")
+    patient_status = patientdata.get('patient_status', "")
+    prescription = patientdata.get('prescription', "")
+    staff_sign = patientdata.get('staff_sign', "")
+    doctor = request.user
+
+    examine = PatientExamination(
+        patient = patient,
+        doctor = doctor,
+        patient_status = patient_status,
+        prescription = prescription,
+        staff_sign = staff_sign,
+    )
+    examine.save()
+
+    appointment_object = Appointment.objects.get(patient_id = patient_ID)
+    appointment_object.delete()
+
+    return JsonResponse({"message": "Examination finished successfully!"}, status=201)
+
+
 def patient(request):
     if request.method == 'GET':
         patients = Patient.objects.all()
