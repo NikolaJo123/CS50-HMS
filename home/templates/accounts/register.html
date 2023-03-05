@@ -1,0 +1,220 @@
+{% extends "layouts/base-fullscreen.html" %}
+
+{% block title %} Register {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} register-page {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="/static/assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+
+{% endblock stylesheets %}
+
+{% block content %}
+
+  <div class="login-logo">
+    <a target="_blank" rel="noopener noreferrer"  href="https://docs.djangoproject.com/en/4.0/">Grace <b>Medical</b>Clinic</a>
+  </div>
+
+  <div class="content-wrapper" style="background-color: #e9ecef;">
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="container-fluid">
+            <div class="col-md-10">
+              <div class="card">
+                <div class="card-body">
+                  <p class="login-box-msg">
+                      {% if msg %}
+                          <span class="text-danger">{{ msg | safe }}</span>
+                      {% else %}
+                      <span>
+                          Add your credentials
+                      </span>
+                      {% endif %}            
+                  </p>
+          
+                  <form role="form" method="post" action="">
+          
+                    {% csrf_token %}
+          
+                    <div class="form-row">
+                      <div class="input-group col-md-3 mb-3">
+                        {{ form.username }}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="text-error">{{ form.username.errors }}</span>
+          
+                      <div class="input-group col-md-3 mb-3">
+                        {{ form.first_name }}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="text-error">{{ form.first_name.errors }}</span>
+          
+                      <div class="input-group col-md-3 mb-3">
+                        {{ form.last_name }}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-user"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="text-error">{{ form.last_name.errors }}</span>
+                      
+                      <div class="input-group col-md-3 mb-3">
+                        {{ form.email }}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-envelope"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="text-error">{{ form.email.errors }}</span>
+                    </div>
+          
+                    <div class="form-row">
+                      <div class="input-group col-md-3 mb-3">
+                        <input type="text" name="id-number" class="form-control" id="" placeholder="Personal ID" required>
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-pen"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="exampleSelectPatient">Select your group</label>
+                        <select name="group" class="form-control" required>
+                            <option value="none" selected>None</option>
+                            {% for group in group_list %}
+                              <option value="{{ group.name }}">{{ group.name }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+  
+                      <div class="form-group col-md-4">
+                        <label for="exampleSelectPatient">Select your role</label>
+                        <select name="role" class="form-control" required>
+                            <option value="none" selected>None</option>
+                            {% for role in role_list %}
+                              <option value="{{ role.id }}">{{ role.title }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+          
+                    <div class="form-row">
+                      <div class="form-group col-md-4">
+                        <label for="exampleSelectPatient">Select your speciality</label>
+                        <select name="speciality" class="form-control" required>
+                            <option value="none" selected>None</option>
+                            {% for spec in speciality_list %}
+                              <option value="{{ spec.id }}">{{ spec.department }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+            
+                      <div class="form-group col-md-4">
+                        <label for="exampleSelectPatient">Select your clinic</label>
+                        <select name="clinic" class="form-control" required>
+                            <option value="none" selected>None</option>
+                            {% for clinic in clinic_list %}
+                              <option value="{{ clinic.id }}">{{ clinic.department_name }}</option>
+                            {% endfor %}
+                        </select>
+                      </div>
+                    </div>
+          
+                    <div class="form-row">
+                      <div class="input-group col-md-4 mb-3">
+                        {{ form.password1 }}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="text-error">{{ form.password1.errors }}</span>
+            
+                      <div class="input-group col-md-4 mb-3">
+                        {{ form.password2 }}
+                        <div class="input-group-append">
+                          <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
+                          </div>
+                        </div>
+                      </div>
+                      <span class="text-error">{{ form.password2.errors }}</span>
+                    </div>
+                    
+                    <div class="row">
+                      <div class="col-8">
+                        <div class="icheck-primary">
+                          <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                          <label for="agreeTerms">
+                          I agree to the <a href="#">terms</a>
+                          </label>
+                        </div>
+                      </div>
+                      <!-- /.col -->
+                      <div class="col-4">
+                        <button type="submit" name="register" class="btn btn-primary btn-block">Register</button>
+                      </div>
+                      <!-- /.col -->
+                    </div>
+                  </form>
+          
+                  <br />
+                  <div class="text-center">
+                      Have an account? <a href="{% url 'login' %}" class="text-center">Login</a>
+                      <br />
+                      <br />
+                      &copy; ColorLib 
+                      <a target="_blank" rel="noopener noreferrer"
+                         href="https://appseed.us/admin-dashboards/django-dashboard-adminlte"><b>Admin</b>LTE</a> 
+                      - coded by <a target="_blank" rel="noopener noreferrer" href="https://appseed.us">AppSeed</a>.
+                  </div>
+          
+                </div>
+                <!-- /.form-box -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.card -->
+    </section>
+
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+{% endblock javascripts %}
+

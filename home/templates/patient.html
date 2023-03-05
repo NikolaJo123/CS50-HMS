@@ -1,0 +1,267 @@
+{% extends 'homebase.html' %}
+
+{% load static %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{% static 'hms/style.css' %}">
+
+{% endblock stylesheets %}
+
+
+{% block body %}
+
+    <div class="content-wrapper">
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Patients Board</h1>
+                        </div>
+                    </div><!-- /.col -->
+                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="col-12 col-sm-12">
+                    <div class="card card-primary card-outline card-tabs">
+                        <div class="card-header p-0 pt-1 border-bottom-0">
+                            <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" id="patientslist" data-toggle="pill" href="" role="tab" aria-selected="false">Patients List</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="registration" data-toggle="pill" href="" role="tab" aria-selected="false">Patient Registration</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="archivedpatiets" data-toggle="pill" href="" role="tab" aria-selected="false">Archived</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- /.card -->
+                    </div>
+                </div>
+
+                <div id="patientsview">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <select class="">
+                                        <option selected>Select Action</option>
+                                        <option value="1">Edit</option>
+                                        <option value="2">Archive</option>
+                                        <option value="3">Delete</option>
+                                    </select>
+
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search" id="search-input">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap" id="pattable">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Surname</th>
+                                                <th>Middlename</th>
+                                                <th>Personal ID</th>
+                                                <th>Birthdate</th>
+                                                <th>Phone</th>
+                                                <th>Mobile</th>
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th>City</th>
+                                                <th>Country</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="patrow">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="registerview">
+                    <div class="col-md-12">
+                        <!-- general form elements -->
+                        <div class="card" style="background-color: #e6ffe6;">
+                            <div class="card-header">
+                                <h3 class="card-title">Register a patient</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <!-- form start -->
+                            <form id="register-form" class="needs-validation" method="post" enctype=multipart/form-data>
+                                <div id="message"></div>
+                                {% csrf_token %}
+                                <!--{{ form.as_p }}-->
+                                <div class="card-body">
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputName">Name</label>
+                                            <input name="name" class="form-control" id="register-name" placeholder="Name" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputSurname">Surnmae</label>
+                                            <input name="surname" class="form-control" id="register-surname"   placeholder="Surname" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputMiddlename">Middlename</label>
+                                            <input  name="middlename" class="form-control" id="register-middlename"   placeholder="Middlename">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPersonalID">Personal ID</label>
+                                            <input  name="patient_ID" class="form-control" id="register-patient-id"   placeholder="Patient ID" required>
+                                        </div>
+                                        <div class="form-group col-md-2">
+                                            <label>Date</label>
+                                            <div class="input-group date" id="register-birthdate-group" name="birthdaygroup" data-target-input="nearest">
+                                                <input type="date" class="form-control datetimepicker-input" id="register-birthdate" name="birthday">
+                                                <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                    <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputPhone">Phone</label>
+                                            <input name="phone" class="form-control" id="register-phone" placeholder="Phone" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputMobile">Mobile</label>
+                                            <input name="mobile" class="form-control" id="register-mobile" placeholder="Mobile" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputEmail">Email</label>
+                                            <input type="email" name="email" class="form-control" id="register-email" placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputAddress">Address</label>
+                                            <input name="address" class="form-control" id="register-address" placeholder="Address" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputCity">City</label>
+                                            <input name="city" class="form-control" id="register-city" placeholder="City" required>
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label for="exampleInputCountry">Country</label>
+                                            <input name="country" class="form-control" id="register-country" placeholder="Country">
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-body -->
+                                
+                                <div class="card-footer card-outline card-tabs">
+                                    <button type="submit" class="btn btn-primary">Register</button>
+                                </div>
+                            </form>
+                        </div>
+                            <!-- /.card -->
+                    </div>
+                </div>
+                
+                <div id="archivedview">
+                    <div class="row">
+                        
+                        <div class="col-12">
+                            
+                            <div class="container-fluid">
+                                <div class="row mb-2">
+                                    <div class="col-sm-6">
+                                        <h3 class="card-title">Archived Patients</h3>
+                                    </div><!-- /.col -->
+                                    
+                                </div><!-- /.row -->
+                            </div><!-- /.container-fluid -->
+                            <div class="card">
+                                <div class="card-header">
+                                    <select class="">
+                                        <option selected>Select Action</option>
+                                        <option value="1">Edit</option>
+                                        <option value="2">Archive</option>
+                                        <option value="3">Delete</option>
+                                    </select>
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search" id="archived_search">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap" id="pattable2">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Surname</th>
+                                                <th>Middlename</th>
+                                                <th>Personal ID</th>
+                                                <th>Birthdate</th>
+                                                <th>Phone</th>
+                                                <th>Mobile</th>
+                                                <th>Email</th>
+                                                <th>Address</th>
+                                                <th>City</th>
+                                                <th>Country</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="archived">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'hms/index.js' %}"></script>
+{% endblock %}
+

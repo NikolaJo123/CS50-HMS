@@ -1,0 +1,114 @@
+{% load static %}
+
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-light-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="/" class="brand-link">
+        <img src="{% static 'assets/img/HospitalLogo.png' %}" alt="GMC Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">Grace Medical Clinic</span>
+    </a>
+    
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image">
+                <img src="{{ request.session.userimage }}" class="img-circle elevation-2" alt="User Image">
+            </div>
+            <div class="info">
+                <a href="/profile" class="d-block">
+                    {{ request.user.first_name }} {{ request.user.last_name }}
+                </a>
+            </div>
+        </div>
+        
+        <!-- SidebarSearch Form -->
+        <div class="form-inline">
+            <div class="input-group" data-widget="sidebar-search">
+                <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-sidebar">
+                        <i class="fas fa-search fa-fw"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="" class="nav-link ">
+                            <i class="far fas fa-user nav-icon"></i>
+                            <p>Patients</p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/patients" class="nav-link {% if 'index.html' in segment %} active {% endif %}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Registration</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/treatment" class="nav-link {% if 'index2.html' in segment %} active {% endif %}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Patient treatment</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link {% if 'index3.html' in segment %} active {% endif %}">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Patients history</p>
+                                </a>
+                            </li>
+                        </ul>
+                            
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/appointment" class="nav-link ">
+                            <i class="far fas fa-calendar nav-icon"></i>
+                            <p>Appointment</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/medicalstaff" class="nav-link ">
+                            <i class="far fas fa-user-md nav-icon"></i>
+                            <p>Medical Staff</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/clinics" class="nav-link ">
+                            <i class="far fas fa-hospital nav-icon"></i>
+                            <p>Clinics</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/lab" class="nav-link ">
+                            <i class="far fas fa-flask nav-icon"></i>
+                            <p>Laboratory</p>
+                        </a>
+                    </li>
+                </li>
+                <li class="nav-item has-treeview {% if 'index' in segment %} menu-open {% endif %}">
+                    <li class="nav-item">
+                        <a href="/payment" class="nav-link ">
+                            <i class="far fas fa-credit-card nav-icon"></i>
+                            <p>Payment</p>
+                        </a>
+                    </li>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+</aside>

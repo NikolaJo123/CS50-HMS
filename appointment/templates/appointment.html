@@ -1,0 +1,293 @@
+{% extends 'homebase.html' %}
+
+{% load static %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block stylesheets %}
+    
+{% endblock stylesheets %}
+
+
+{% block body %}
+    <div class="content-wrapper">
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Appointments Board</h1>
+                        </div>
+                        
+                    </div><!-- /.col -->
+                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="col-sm-2">
+                    <button id="crtapp" type="button" class="btn btn-block btn-primary btn-sm">
+                        Create an appointment
+                    </button>
+                </div>
+                <hr>
+
+                <div id="appointmentview">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="row mb-2">
+                                <div class="col-sm-6">
+                                    <h5 class="m-0 text-dark">Current Appointments</h5>
+                                </div><!-- /.col -->
+                            </div><!-- /.row -->
+                        </div>
+                        <div class="col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-tools">
+                                        <div class="input-group input-group-sm" style="width: 150px;">
+                                            <input type="text" name="table_search" class="form-control float-right" placeholder="Search" id="appsearch">
+
+                                            <div class="input-group-append">
+                                                <button type="submit" class="btn btn-default">
+                                                    <i class="fas fa-search"></i>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.card-header -->
+                                <div class="card-body table-responsive p-0" style="height: 300px;">
+                                    <table class="table table-head-fixed text-nowrap" id="apptable">
+                                        <thead>
+                                            <tr>
+                                                <th></th>
+                                                <th>Name</th>
+                                                <th>Surname</th>
+                                                <th>Middlename</th>
+                                                <th>Personal ID</th>
+                                                <th>Time/Date</th>
+                                                <th>Scheduled by</th>
+                                                <th>Scheduled at</th>
+                                                <th>Updated status at</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="approw">
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- /.card-body -->
+                                <div class="card-footer">
+                                    
+                                </div>
+                            </div>
+                            <!-- /.card -->
+                        </div>
+                    </div>
+                </div>
+
+                <div id="appform">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="col-md-12">
+                                <!-- general form elements -->
+                                <div class="card card-primary card-outline card-tabs" style="background-color: #e6ffe6;">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Schedule an appointment</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form id="appointment-form" class="needs-validation" method="post" enctype=multipart/form-data>
+                                        <div id="message"></div>
+                                        {% csrf_token %}
+                                        <!--{{ form.as_p }}-->
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleSelectPatient">Patient</label>
+                                                    <select class="form-control" id="selpat">
+                                                        <option selected>-Select Patient-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleInputPersonalID">Personal ID</label>
+                                                    <input  name="patient_ID" class="form-control" id="schedule-patient-id" placeholder="Patient ID" maxlength="15"  required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleSelectDoctor">Doctor</label>
+                                                    <select class="form-control col-md-8" id="seldoc">
+                                                        <option selected>-Select Doctor-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleSelectClinik">Clinik</label>
+                                                    <select class="form-control col-md-8" id="selclnk">
+                                                        <option selected>-Select Clinic-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <label for="exampleInputTime">Time</label>
+                                                    <input  name="time" class="form-control" id="schedule-time" placeholder="Enter time">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label>Date</label>
+                                                    <div class="input-group date" id="schedule-date-group" name="dategroup" data-target-input="nearest">
+                                                        <input type="date" class="form-control datetimepicker-input" id="schedule-date" name="Date">
+                                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3" style="display: none;">
+                                                    <label for="exampleSelectScheduled">Scheduled by</label>
+                                                    <input  name="scheduled" class="form-control" id="scheduleby" placeholder="Scheduled by" value="{{ request.user.first_name }} {{ request.user.last_name }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleAppointmentReason">Appointment Reason</label>
+                                                    <textarea name="AppointmentReason" class="form-control" id="app-reason" rows="4" cols="50" required></textarea>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleReAppointmentReason">Re-appointment Reason</label>
+                                                    <textarea name="ReAppointmentReason" class="form-control" id="reapp-reason" rows="4" cols="50"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        
+                                        <div class="card-footer card-outline card-tabs">
+                                            <button type="submit" class="btn btn-primary">Make appointment</button>
+                                            <button type="button" id="back" class="btn btn-danger">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                    <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="updateform">
+                    <div class="row">
+                        <div class="container-fluid">
+                            <div class="col-md-12">
+                                <!-- general form elements -->
+                                <div class="card card-primary card-outline card-tabs" style="background-color: #e6ffe6;">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Update an appointment</h3>
+                                    </div>
+                                    <!-- /.card-header -->
+                                    <!-- form start -->
+                                    <form id="update-form" class="needs-validation" method="post" enctype=multipart/form-data>
+                                        <div id="message"></div>
+                                        {% csrf_token %}
+                                        <!--{{ form.as_p }}-->
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4" style="display: none;">
+                                                    <label for="exampleInputPersonalID">Appointment ID</label>
+                                                    <input  name="appointment_ID" class="form-control" id="update-appointment-id" placeholder="Appointment ID" required>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleSelectPatient">Patient</label>
+                                                    <select class="form-control" id="selpat2">
+                                                        <option selected>-Select Patient-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleInputPersonalID">Personal ID</label>
+                                                    <input  name="patient_ID" class="form-control" id="update-patient-id" placeholder="Patient ID" maxlength="15"  required>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleSelectDoctor">Doctor</label>
+                                                    <select class="form-control col-md-8" id="seldoc2">
+                                                        <option selected>-Select Doctor-</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleSelectClinik">Clinik</label>
+                                                    <select class="form-control col-md-8" id="selclnk2">
+                                                        <option selected>-Select Clinic-</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-2">
+                                                    <label for="exampleInputTime">Time</label>
+                                                    <input  name="time" class="form-control" id="update-time" placeholder="Enter time">
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                    <label>Date</label>
+                                                    <div class="input-group date" id="update-date-group" name="dategroup" data-target-input="nearest">
+                                                        <input type="date" class="form-control datetimepicker-input" id="update-date" name="Date">
+                                                        <div class="input-group-append" data-target="#reservationdate" data-toggle="datetimepicker">
+                                                            <div class="input-group-text"><i class="fa fa-calendar"></i>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-3" style="display: none;">
+                                                    <label for="exampleSelectScheduled">Scheduled by</label>
+                                                    <input  name="scheduled" class="form-control" id="updateby" placeholder="Scheduled by" value="{{ request.user.first_name }} {{ request.user.last_name }}" disabled>
+                                                </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleAppointmentReason">Appointment Reason</label>
+                                                    <textarea name="AppointmentReason" class="form-control" id="app-reason2" rows="4" cols="50" required></textarea>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label for="exampleReAppointmentReason">Re-appointment Reason</label>
+                                                    <textarea name="ReAppointmentReason" class="form-control" id="reapp-reason2" rows="4" cols="50"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /.card-body -->
+                                        
+                                        <div class="card-footer card-outline card-tabs">
+                                            <button type="submit" class="btn btn-success">Save Changes</button>
+                                            <button type="button" id="del" class="btn btn-danger">Delete appointment</button>
+                                            <button type="button" id="back2" class="btn btn-primary">Cancel</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                    <!-- /.card -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="someid2">
+                    
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+
+    </div>
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static 'app/app_index.js' %}"></script>
+{% endblock %}

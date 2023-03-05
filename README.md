@@ -23,3 +23,18 @@ To run this project you need to follow the required steps:
 	
 
 After completing all of the above steps you'll successfully run this Django Hospital Management System project.
+
+Additional modules:
+
+	To install Modified Preorder Tree Traversal or short known as MPTT run the following command in cmd.
+		
+		- pip install django-mptt
+	
+		MPTT is a technique for storing hierarchical data in a database. The aim is to make retrieval operations very efficient.
+
+	To install Python Pillow run the following command.
+
+		- python -m pip install Pillow
+
+		Pillow or PIL is a Python imaging library that adds image processing capabilities to your Python interpreter. This library provides extensive file format support, an efficient internal representation, and fairly powerful image processing capabilities.
+

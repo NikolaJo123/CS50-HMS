@@ -1,0 +1,135 @@
+{% extends 'homebase.html' %}
+
+{% load static %}
+
+{% block sidebar %} {% include 'sidebar.html' %} {% endblock %}
+
+{% block stylesheets %}
+    
+{% endblock stylesheets %}
+
+{% block body %}
+    <div class="content-wrapper">
+
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="">
+                    <h3 style="color: blue; text-align: center;">This is the admin Super User and its not authorized as a medical personal. <br> 
+                        Click the button below to register this user as a personal.</h3>
+                </div>
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+
+                    </div><!-- /.col -->
+                    
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div id="profileview">
+                    <div class="card card-primary card-outline card-tabs">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <!-- Profile Image -->
+                                <div class="card">
+                                    <div class="card-body box-profile">
+                                    <div class="text-center" id="img">
+                                        
+                                    </div>
+                    
+                                    <h3 class="profile-username text-center"><span id="name"></span> <span id="middlename"></span> <span id="surname"></span></h3>
+                    
+                                    <p class="text-muted text-center" id="title">My Title</p>
+                    
+                                    <ul class="list-group list-group-unbordered mb-3">
+                                        <li class="list-group-item">
+                                            <b>Speciality</b> <a class="float-right" id="speciality">No record</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Clinic</b> <a class="float-right" id="clinic">No record</a>
+                                        </li>
+                                        <li class="list-group-item">
+                                            <b>Employee ID</b> <a class="float-right">No record</a>
+                                        </li>
+                                    </ul>
+                                    </div>
+                                    <!-- /.card-body -->
+                                </div>
+                                <!-- /.card -->
+                            </div>
+                            <div class="col-md-6">
+                                <div class="card ">
+                                    
+                                    <div class="card-body">
+                                      <div class="tab-content">
+                                            <div class="active tab-pane" id="activity">
+                                                <!-- Post -->
+                                                <div class="post">
+                                                    <div class="user-block">
+                                                        <div>
+                                                            <label>ID number:</label>
+                                                            <span id="personalID" class="">No record</span>
+                                                        </div>
+                                                        <div>
+                                                            <label>Birtdate:</label>
+                                                            <span id="birth" class="">No record</span>
+                                                        </div>
+                                                        <hr>
+                                                        <div>
+                                                            <span id="address" class="float-right">No record</span>
+                                                            <label class="float-right">Address:</label>
+                                                        </div>
+                                                        <div>
+                                                            <label>Email:</label>
+                                                            <span id="email" class="">No record</span>
+                                                        </div>
+                                                        <div>
+                                                            <span id="city" class="float-right">No record</span>
+                                                            <label class="float-right">City:</label>
+                                                        </div>
+                                                        <div>
+                                                            <label class="">Phone:</label>
+                                                            <span id="phone" class="">No record</span>
+                                                        </div>
+                                                        <div>
+                                                            <span id="country" class="float-right">No record</span>
+                                                            <label class="float-right">Country:</label>
+                                                        </div>
+                                                        <div>
+                                                            <label>Mobile:</label>
+                                                            <span id="mobile" class="">No record</span>
+                                                        </div>
+                                                       
+                                                    </div>
+                                                    <!-- /.user-block -->
+                                                    <p>
+                                                    </p>
+                                                </div>
+                                                <!-- /.post -->
+                                            </div>
+                                            <!-- /.tab-pane -->
+                                        </div><!-- /.card-body -->
+                                    </div>
+                                </div>
+                                <a class="btn btn-success" id="edit" href="/admin">
+                                    <i class="fas fa-edit"></i> Register as personal
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{% static 'single_user.js' %}"></script>
+{% endblock %}
